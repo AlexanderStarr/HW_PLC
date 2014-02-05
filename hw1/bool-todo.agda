@@ -91,31 +91,6 @@ imp-to-|| ff tt = refl
 imp-to-|| tt ff = refl
 imp-to-|| tt tt = refl
 
-imp-mp : ∀ {b b' : 𝔹} → b imp b' ≡ tt → b ≡ tt → b' ≡ tt
-imp-mp = {!!}
-
-&&-cong₁ : ∀ {b1 b1' b2 : 𝔹} → b1 ≡ b1' → b1 && b2 ≡ b1' && b2
-&&-cong₁ = ?
-
-&&-cong₂ : ∀ {b1 b2 b2' : 𝔹} → b2 ≡ b2' → b1 && b2 ≡ b1 && b2'
-&&-cong₂ = {!!} 
-
-~-cong : ∀ {b b' : 𝔹} → b ≡ b' → ~ b ≡ ~ b'
-~-cong = {!!}
-
-ite-cong₁ : ∀{ℓ}{A : Set ℓ} {b b' : 𝔹}(x y : A) → b ≡ b' → (if b then x else y) ≡ (if b' then x else y)
-ite-cong₁ = {!!}
-
-ite-cong₂ : ∀{ℓ}{A : Set ℓ} (b : 𝔹){x x' : A}(y : A) → x ≡ x' → (if b then x else y) ≡ (if b then x' else y)
-ite-cong₂ = {!!}
-
-ite-cong₃ : ∀{ℓ}{A : Set ℓ} (b : 𝔹)(x : A){y y' : A} → y ≡ y' → (if b then x else y) ≡ (if b then x else y')
-ite-cong₃ tt x y = refl
-ite-cong₃ ff x y = {!!}
-
-&&-split : ∀ {b b' : 𝔹} → b || b' ≡ ff → b ≡ ff ⊎ b' ≡ ff
-&&-split = {!!}
-
 imp-ff : ∀ (b : 𝔹) → b imp ff ≡ ~ b
 imp-ff ff = refl
 imp-ff tt = refl
