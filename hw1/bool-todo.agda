@@ -4,17 +4,21 @@ open import lib
 
 infixr 4 _imp_ 
 
-_imp_ : 𝔹 → 𝔹 → 𝔹 
-b1 imp b2 = {!!}
+_imp_ : 𝔹 → 𝔹 → 𝔹
+tt imp ff = ff 
+b1 imp b2 = tt
 
 ff-imp : ∀ (b : 𝔹) → ff imp b ≡ tt
-ff-imp = {!!}
+ff-imp ff = refl
+ff-imp tt = refl
 
 imp-tt : ∀ (b : 𝔹) → b imp tt ≡ tt
-imp-tt = {!!}
+imp-tt ff = refl
+imp-tt tt = refl
 
 imp-same : ∀ (b : 𝔹) → b imp b ≡ tt
-imp-same = {!!}
+imp-same ff = refl
+imp-same tt = refl
 
 &&-contra : ∀ (b : 𝔹) → b && ~ b ≡ ff
 &&-contra = {!!}
