@@ -1,0 +1,85 @@
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole00.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole01.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole02.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole03.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole04.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole05.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole06.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole07.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole08.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole09.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole10.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole11.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole12.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole13.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole14.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole15.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole16.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole16.agda:7,15-21
+Not in scope:
+  imp-mp
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole16.agda:7,15-21
+when scope checking imp-mp
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole17.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole17.agda:7,17-25
+Not in scope:
+  &&-cong₁
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole17.agda:7,17-25
+when scope checking &&-cong₁
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole19.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole19.agda:7,15-21
+Not in scope:
+  ~-cong
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole19.agda:7,15-21
+when scope checking ~-cong
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole20.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole20.agda:7,18-27
+Not in scope:
+  ite-cong₁
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole20.agda:7,18-27
+when scope checking ite-cong₁
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole21.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole21.agda:7,18-27
+Not in scope:
+  ite-cong₂
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole21.agda:7,18-27
+when scope checking ite-cong₂
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole22.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole22.agda:7,18-27
+Not in scope:
+  ite-cong₃
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole22.agda:7,18-27
+when scope checking ite-cong₃
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole23.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole23.agda:7,17-25
+Not in scope:
+  &&-split
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole23.agda:7,17-25
+when scope checking &&-split
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole24.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole25.agda
