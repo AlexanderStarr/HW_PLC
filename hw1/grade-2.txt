@@ -1,0 +1,114 @@
+Found alstarr/hw1 directory.
+Found alstarr/hw1/bool-todo.agda.
+------------------------------
+Checking alstarr/hw1/bool-todo.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 alstarr/hw1/bool-todo.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+Type-checking alstarr/hw1/bool-todo.agda succeded, with no holes reported.
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole00.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole00.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole00.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole01.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole01.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole01.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole02.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole02.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole02.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole03.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole03.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole03.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole04.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole04.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole04.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole05.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole05.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole05.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole06.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole06.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole06.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole07.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole07.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole07.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole08.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole08.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole08.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole09.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole09.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole09.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole10.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole10.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole10.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole11.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole11.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole11.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole12.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole12.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole12.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole13.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole13.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole13.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole14.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole14.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole14.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole15.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole15.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole15.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole16.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole16.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole16.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole17.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole17.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole17.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole18.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole18.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole18.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole19.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole19.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole19.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole20.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole20.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole20.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole21.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole21.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole21.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole22.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole22.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole22.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole23.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole23.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole23.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole24.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole24.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole24.agda
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole25.agda
+agda.sh --safe --verbose=0 -i alstarr/hw1 -i /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole25.agda >> alstarr/hw1/agda-output-2.txt 2>&1
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole25.agda
+------------------------------
+Testing completed.
+Final score is:
+120
