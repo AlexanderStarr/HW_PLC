@@ -45,6 +45,13 @@ Not in scope:
   at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole17.agda:7,17-25
 when scope checking &&-cong₁
 ---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole18.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole18.agda:7,35-43
+Not in scope:
+  &&-cong₂
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole18.agda:7,35-43
+when scope checking &&-cong₂
+---------------------------
 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole19.agda
 /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw1/hole19.agda:7,15-21
 Not in scope:
