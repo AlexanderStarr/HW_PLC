@@ -25,15 +25,17 @@ factorial (suc x) = (suc x) * factorial (x)
 1-pow {0} = refl
 1-pow {suc n} rewrite 1-pow {n} | +0 n = refl
 
-iszero-assoc : ∀ (n m : ℕ) → iszero (n + m) ≡ iszero n && iszero m
-iszero-assoc 0 0 = refl
-iszero-assoc 0 m = refl
-iszero-assoc (suc n) m rewrite iszero-assoc n m = refl
+-- Helper function for factorial-nonzero, to prove that iszero of a sum of numbers
+-- is equivalent to the conjunction of iszero on each term in the sum.
+iszero-+ : ∀ (n m : ℕ) → iszero (n + m) ≡ iszero n && iszero m
+iszero-+ 0 0 = refl
+iszero-+ 0 m = refl
+iszero-+ (suc n) m rewrite iszero-+ n m = refl
 
 -- 12 points
 factorial-nonzero : ∀ (n : ℕ) → iszero (factorial n) ≡ ff
 factorial-nonzero 0 = refl
-factorial-nonzero (suc n) rewrite factorial-nonzero n | iszero-assoc (factorial n) (n * factorial n) = {!!}
+factorial-nonzero (suc n) rewrite factorial-nonzero n | iszero-+ (factorial n) (n * factorial n) | factorial-nonzero n = refl
 
 -- 12 points. hint: try induction on y 
 pow+ : ∀ (x y z : ℕ) → x pow (y + z) ≡ (x pow y) * (x pow z)
@@ -52,17 +54,26 @@ parity-odd (suc x) rewrite parity-odd x = refl
 
 -- 12 points
 =ℕ-sym : ∀ (x y : ℕ) → (x =ℕ y) ≡ (y =ℕ x)
-=ℕ-sym x y = {!!}
+=ℕ-sym 0 0 = refl
+=ℕ-sym 0 (suc y) = refl
+=ℕ-sym (suc x) 0 = refl
+=ℕ-sym (suc x) (suc y) rewrite =ℕ-sym x y = refl
 
 -- another version of addition
 _+'_ : ℕ → ℕ → ℕ
 0 +' y = y
 suc x +' y = x +' (suc y)
 
+-- Helper function for +'comm
++'0 : ∀ (x : ℕ) → x +' 0 ≡ x
++'0 0 = refl
++'0 (suc x) rewrite +'0 x = {!!}
+
 -- 12 points. You are not allowed to call +comm when proving this one
 -- (though you can certainly borrow ideas from the code for +comm):
 +'comm : ∀ (x y : ℕ) → x +' y ≡ y +' x
-+'comm = {!!}
++'comm 0 y = {!!}
++'comm (suc x) y = {!!}
 
 -- 12 points
 +'-equiv-+ : ∀ (x y : ℕ) → x + y ≡ x +' y
