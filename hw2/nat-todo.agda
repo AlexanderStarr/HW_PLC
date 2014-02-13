@@ -64,47 +64,6 @@ _+'_ : ℕ → ℕ → ℕ
 0 +' y = y
 suc x +' y = x +' (suc y)
 
--- 12 points. You are not allowed to call +comm when proving this one
--- (though you can certainly borrow ideas from the code for +comm):
-+'comm : ∀ (x y : ℕ) → x +' y ≡ y +' x
-+'comm 0 y = {!!}
-+'comm (suc x) y rewrite +'comm x y = {!!}
-
--- 12 points
-+'-equiv-+ : ∀ (x y : ℕ) → x + y ≡ x +' y
-+'-equiv-+ 0 y = refl
-+'-equiv-+ (suc x) y rewrite +'-equiv-+ x y = {!!}
-
--- 12 points
-+inj1 : ∀ {x y z : ℕ} → x + y ≡ x + z → y ≡ z
-+inj1 {0} {y} {z} p = p
-+inj1 {suc x} {y} {z} p = {!!}
-
--- 12 points
-+inj2 : ∀ {x y z : ℕ} → x + z ≡ y + z → x ≡ y
-+inj2 = {!!}
-
--- 12 points
-*distribl : ∀ (x y z : ℕ) → x * (y + z) ≡ x * y + x * z
-*distribl 0 y z = refl
-*distribl (suc x) y z rewrite *distribl x y z | +assoc (y + z) (x * y) (x * z) = {!!}
-
--- 12 points
-pow* : ∀ (x y z : ℕ) → x pow (y * z) ≡ (x pow y) pow z
-pow* = {!!}
-
--- 12 points
-*inj1 : ∀ {x y z : ℕ} → x ≢ 0 → x * y ≡ x * z → y ≡ z
-*inj1 = {!!}
-
--- 12 points
-*inj2 : ∀ {x y z : ℕ} → z ≢ 0 → x * z ≡ y * z → x ≡ y
-*inj2 = {!!}
-
--- 13 points
-factorial-mono : ∀ (x y : ℕ) → 0 < x ≡ tt → x < y ≡ tt → factorial x < factorial y ≡ tt
-factorial-mono x y p = {!!}
-
 -- Helper function for parity-add, to prove that b xor ff ≡ b
 xor-ff : ∀ (b : 𝔹) → b xor ff ≡ b
 xor-ff ff = refl
@@ -129,22 +88,3 @@ parity-add 0 0 = refl
 parity-add (suc x) 0 rewrite +0 x | xor-ff (~ parity x) = refl
 parity-add 0 (suc y) rewrite ff-xor (~ parity y) = refl
 parity-add (suc x) (suc y) rewrite parity-add x (suc y) | ~-xor (parity x) (~ parity y) = refl
-
--- Helper function for parity-mult.  Proves that && is commutative (from hw1).
-&&-comm : ∀ (b1 b2 : 𝔹) → b1 && b2 ≡ b2 && b1
-&&-comm ff ff = refl
-&&-comm ff tt = refl
-&&-comm tt ff = refl
-&&-comm tt tt = refl
-
--- 13 points. x * y is odd (parity = tt) iff x is odd and y is odd.
-parity-mult : ∀ (x y : ℕ) → parity (x * y) ≡ (parity x) && (parity y)
-parity-mult 0 0 = refl
-parity-mult (suc x) 0 rewrite *0 x | &&-comm (~ parity x) ff = refl
-parity-mult 0 (suc y) = refl
-parity-mult (suc x) (suc y) rewrite *comm x (suc y) = {!!}
-
--- 15 points. [probably hard] this might require case-splitting on whether or not x > z
-+∸ : ∀ (x y z : ℕ) → (x + y) ∸ z ≡ (x ∸ z) + (y ∸ (z ∸ x))
-+∸ = {!!}
-
