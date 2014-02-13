@@ -44,8 +44,8 @@ pow+ x (suc y) z rewrite pow+ x y z | *assoc x (x pow y) (x pow z) = refl
 
 -- 12 points
 nonzero< : ∀ {n : ℕ} → (iszero n) ≡ ff → 0 < n ≡ tt
-nonzero< {0} = sym
-nonzero< {suc x} = {!!}
+nonzero< {0} ()
+nonzero< {suc x} p = refl
 
 -- 12 points
 parity-odd : ∀ (x : ℕ) → parity (x * 2 + 1) ≡ tt
@@ -64,24 +64,21 @@ _+'_ : ℕ → ℕ → ℕ
 0 +' y = y
 suc x +' y = x +' (suc y)
 
--- Helper function for +'comm
-+'0 : ∀ (x : ℕ) → x +' 0 ≡ x
-+'0 0 = refl
-+'0 (suc x) rewrite +'0 x = {!!}
-
 -- 12 points. You are not allowed to call +comm when proving this one
 -- (though you can certainly borrow ideas from the code for +comm):
 +'comm : ∀ (x y : ℕ) → x +' y ≡ y +' x
 +'comm 0 y = {!!}
-+'comm (suc x) y = {!!}
++'comm (suc x) y rewrite +'comm x y = {!!}
 
 -- 12 points
 +'-equiv-+ : ∀ (x y : ℕ) → x + y ≡ x +' y
-+'-equiv-+ = {!!}
++'-equiv-+ 0 y = refl
++'-equiv-+ (suc x) y rewrite +'-equiv-+ x y = {!!}
 
 -- 12 points
 +inj1 : ∀ {x y z : ℕ} → x + y ≡ x + z → y ≡ z
-+inj1 = {!!}
++inj1 {0} {y} {z} p = p
++inj1 {suc x} {y} {z} p = {!!}
 
 -- 12 points
 +inj2 : ∀ {x y z : ℕ} → x + z ≡ y + z → x ≡ y
@@ -89,7 +86,8 @@ suc x +' y = x +' (suc y)
 
 -- 12 points
 *distribl : ∀ (x y z : ℕ) → x * (y + z) ≡ x * y + x * z
-*distribl = {!!}
+*distribl 0 y z = refl
+*distribl (suc x) y z rewrite *distribl x y z | +assoc (y + z) (x * y) (x * z) = {!!}
 
 -- 12 points
 pow* : ∀ (x y z : ℕ) → x pow (y * z) ≡ (x pow y) pow z
@@ -105,12 +103,32 @@ pow* = {!!}
 
 -- 13 points
 factorial-mono : ∀ (x y : ℕ) → 0 < x ≡ tt → x < y ≡ tt → factorial x < factorial y ≡ tt
-factorial-mono = {!!}
+factorial-mono x y p = {!!}
+
+-- Helper function for parity-add, to prove that b xor ff ≡ b
+xor-ff : ∀ (b : 𝔹) → b xor ff ≡ b
+xor-ff ff = refl
+xor-ff tt = refl
+
+-- Helper function for parity-add, to prove that ff xor b ≡ b
+ff-xor : ∀ (b : 𝔹) → ff xor b ≡ b
+ff-xor ff = refl
+ff-xor tt = refl
+
+-- Helper function for parity-add, to prove that ~ (b1 xor b2) = 
+~-xor : ∀ (b1 b2 : 𝔹) → ~ (b1 xor b2) ≡ ~ b1 xor b2
+~-xor tt tt = refl
+~-xor ff ff = refl
+~-xor tt ff = refl
+~-xor ff tt = refl
 
 -- 13 points. x + y is odd (parity = tt) iff exactly one of x and y is odd
 -- (either x is odd and y is even, or vice versa)
 parity-add : ∀ (x y : ℕ) → parity (x + y) ≡ (parity x) xor (parity y)
-parity-add = {!!}
+parity-add 0 0 = refl
+parity-add (suc x) 0 rewrite +0 x | xor-ff (~ parity x) = refl
+parity-add 0 (suc y) rewrite ff-xor (~ parity y) = refl
+parity-add (suc x) (suc y) rewrite parity-add x (suc y) | ~-xor (parity x) (~ parity y) = refl
 
 -- 13 points. x * y is odd (parity = tt) iff x is odd and y is odd.
 parity-mult : ∀ (x y : ℕ) → parity (x * y) ≡ (parity x) && (parity y)
