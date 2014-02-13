@@ -115,7 +115,7 @@ ff-xor : ∀ (b : 𝔹) → ff xor b ≡ b
 ff-xor ff = refl
 ff-xor tt = refl
 
--- Helper function for parity-add, to prove that ~ (b1 xor b2) = 
+-- Helper function for parity-add, to prove that ~ (b1 xor b2) ≡ ~ b1 xor b2
 ~-xor : ∀ (b1 b2 : 𝔹) → ~ (b1 xor b2) ≡ ~ b1 xor b2
 ~-xor tt tt = refl
 ~-xor ff ff = refl
@@ -130,9 +130,19 @@ parity-add (suc x) 0 rewrite +0 x | xor-ff (~ parity x) = refl
 parity-add 0 (suc y) rewrite ff-xor (~ parity y) = refl
 parity-add (suc x) (suc y) rewrite parity-add x (suc y) | ~-xor (parity x) (~ parity y) = refl
 
+-- Helper function for parity-mult.  Proves that && is commutative (from hw1).
+&&-comm : ∀ (b1 b2 : 𝔹) → b1 && b2 ≡ b2 && b1
+&&-comm ff ff = refl
+&&-comm ff tt = refl
+&&-comm tt ff = refl
+&&-comm tt tt = refl
+
 -- 13 points. x * y is odd (parity = tt) iff x is odd and y is odd.
 parity-mult : ∀ (x y : ℕ) → parity (x * y) ≡ (parity x) && (parity y)
-parity-mult = {!!}
+parity-mult 0 0 = refl
+parity-mult (suc x) 0 rewrite *0 x | &&-comm (~ parity x) ff = refl
+parity-mult 0 (suc y) = refl
+parity-mult (suc x) (suc y) rewrite *comm x (suc y) = {!!}
 
 -- 15 points. [probably hard] this might require case-splitting on whether or not x > z
 +∸ : ∀ (x y z : ℕ) → (x + y) ∸ z ≡ (x ∸ z) + (y ∸ (z ∸ x))
