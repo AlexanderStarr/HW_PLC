@@ -38,7 +38,8 @@ lem-decode-empty = refl
    I considered.
 -}
 encodeh : 𝔹 → run → run
-encodeh = {!!}
+encodeh b empty-run = (nonempty-run b 0 [])
+encodeh b (nonempty-run bs n l) = if (~ (b xor bs)) then (nonempty-run b (suc n) l) else (nonempty-run b 0 (n :: l))
 
 -- 10 points.  Hint: use encodeh in the case where the list is of the form (b :: bs).
 encode : 𝕃 𝔹 → run
