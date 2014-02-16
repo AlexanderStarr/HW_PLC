@@ -88,3 +88,4 @@ parity-add 0 0 = refl
 parity-add (suc x) 0 rewrite +0 x | xor-ff (~ parity x) = refl
 parity-add 0 (suc y) rewrite ff-xor (~ parity y) = refl
 parity-add (suc x) (suc y) rewrite parity-add x (suc y) | ~-xor (parity x) (~ parity y) = refl
+
