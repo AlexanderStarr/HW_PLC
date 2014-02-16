@@ -8,19 +8,22 @@ data run : Set where
 
 -- 10 points
 decode : run → 𝕃 𝔹
-decode = {!!}
+decode empty-run = []
+decode (nonempty-run b n []) = repeat (n + 1) b
+decode (nonempty-run b n (nl :: l)) = ((repeat (n + 1) b) ++ (decode (nonempty-run (~ b) nl l)))
 
 test-input = ff :: tt :: tt :: tt :: ff :: ff :: []
 
 decode-test1 = decode (nonempty-run ff 0 (2 :: 1 :: []))
 
 -- 3 points for passing this test
+-- If decode works properly, this should evaluate to refl.
 lem-decode-test1 : decode-test1 ≡ test-input
-lem-decode-test1 = {!!}
+lem-decode-test1 = refl
 
 -- 1 point for passing this test
 lem-decode-empty : decode empty-run ≡ []
-lem-decode-empty = {!!}
+lem-decode-empty = refl
 
 {- 0 points: this is just a helper for encode.
 
