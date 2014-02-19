@@ -1,0 +1,97 @@
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole00.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole01.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole02.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole03.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole04.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole05.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole06.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole07.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole08.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole09.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole09.agda:7,15-21
+Not in scope:
+  +'comm
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole09.agda:7,15-21
+when scope checking +'comm
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole10.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole10.agda:7,19-29
+Not in scope:
+  +'-equiv-+
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole10.agda:7,19-29
+when scope checking +'-equiv-+
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole11.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole11.agda:7,26-31
+Not in scope:
+  +inj1
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole11.agda:7,26-31
+when scope checking +inj1
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole12.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole12.agda:7,14-19
+Not in scope:
+  +inj2
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole12.agda:7,14-19
+when scope checking +inj2
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole13.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole13.agda:7,18-27
+Not in scope:
+  *distribl
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole13.agda:7,18-27
+when scope checking *distribl
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole14.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole14.agda:8,13-17
+Not in scope:
+  pow*
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole14.agda:8,13-17
+when scope checking pow*
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole15.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole15.agda:7,14-19
+Not in scope:
+  *inj1
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole15.agda:7,14-19
+when scope checking *inj1
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole16.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole16.agda:7,11-16
+Not in scope:
+  *inj2
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole16.agda:7,11-16
+when scope checking *inj2
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole17.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole17.agda:7,20-34
+Not in scope:
+  factorial-mono
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole17.agda:7,20-34
+when scope checking factorial-mono
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole18.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole19.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole19.agda:8,17-28
+Not in scope:
+  parity-mult
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole19.agda:8,17-28
+when scope checking parity-mult
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole20.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole20.agda:7,8-10
+Not in scope:
+  +∸
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw2/hole20.agda:7,8-10
+when scope checking +∸
