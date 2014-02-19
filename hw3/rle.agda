@@ -112,16 +112,6 @@ length-++ : ∀{ℓ}{A : Set ℓ}(l1 l2 : 𝕃 A) → length (l1 ++ l2) ≡ (len
 length-++ [] l2 = refl
 length-++ (e :: l1) l2 rewrite length-++ l1 l2 = refl
 
--- 12 points (not needed for encode-decode or decode-encode theorems below
-decode-length : ∀ (b : 𝔹) (n : ℕ) (ns : 𝕃 ℕ) → suc (length ns) ≤ length (decode (nonempty-run b n ns)) ≡ tt
-decode-length b 0 [] = refl
-decode-length b (suc n) [] rewrite decode-length b n [] = refl
-decode-length b 0 (nn :: ns) rewrite decode-length (~ b) nn ns = refl
-decode-length b (suc n) (nn :: ns) rewrite decode-length (~ b) nn ns = {!!}
-
-mac-decode-length : ∀ (b : bool) (n : nat) (ns : list nat) → suc (length ns) ≤ length (decode (nonempty-run b n ns)) ≡ tt
-mac-decode-length = decode-length
-
 -- 12 points
 encode-repeat : ∀ (b : 𝔹)(n : ℕ) → encode (repeat (suc n) b) ≡ (nonempty-run b n [])
 encode-repeat b 0 = refl
@@ -130,11 +120,18 @@ encode-repeat b (suc n) rewrite encode-repeat b n | encodeh-lem3 b n [] = refl
 mac-encode-repeat : ∀ (b : bool)(n : nat) → encode (repeat (suc n) b) ≡ (nonempty-run b n [])
 mac-encode-repeat = encode-repeat
 
+-- Helper function for decode-encodeh
+deh-helper : ∀ (b : 𝔹)(n : ℕ)(l : 𝕃 ℕ) → decode (nonempty-run b (suc n) l) ≡ b :: decode (nonempty-run b n l)
+deh-helper b 0 [] = refl
+deh-helper b (suc n) [] = refl
+deh-helper b 0 (h :: t) = refl
+deh-helper b (suc n) (h :: t) = refl
+
 -- 8 points
 decode-encodeh : ∀ (b : 𝔹) (r : run) → decode (encodeh b r) ≡ b :: decode r
 decode-encodeh b empty-run = refl
-decode-encodeh ff (nonempty-run ff rn l) = {!!}
-decode-encodeh tt (nonempty-run tt rn l) = {!!}
+decode-encodeh ff (nonempty-run ff rn l) rewrite deh-helper ff rn l = refl
+decode-encodeh tt (nonempty-run tt rn l) rewrite deh-helper tt rn l = refl
 decode-encodeh ff (nonempty-run tt rn l) = refl
 decode-encodeh tt (nonempty-run ff rn l) = refl
 
@@ -149,8 +146,3 @@ decode-encode (h :: t) rewrite decode-encodeh h (encode t) | decode-encode t = r
 mac-decode-encode : ∀ (l : list bool) → decode (encode l) ≡ l
 mac-decode-encode = decode-encode
 
--- 15 points
-encode-decode : ∀ (r : run) → encode (decode r) ≡ r
-encode-decode empty-run = refl
-encode-decode (nonempty-run b n []) rewrite encode-repeat b n = refl
-encode-decode (nonempty-run b n (h :: t)) = {!!}
