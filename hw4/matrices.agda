@@ -10,36 +10,40 @@ n by m matrix = 𝕍 (𝕍 ℕ m) n
    every element is 0.  Hint: this is very easy to write if you use
    the repeat𝕍 function from vector.agda -}
 zero-matrix : (n m : ℕ) → n by m matrix
-zero-matrix = {!!}
+zero-matrix n m = repeat𝕍 (repeat𝕍 0 m) n
 
 -- 2 points for passing this test case.
 test-zero-matrix : zero-matrix 2 3 ≡ ((0 :: 0 :: 0 :: []) :: (0 :: 0 :: 0 :: []) :: [])
-test-zero-matrix = {!!}
+test-zero-matrix = refl
 
 -- 0 points.  I suggest you write this function as a helper for matrix-to-string below.
 row-to-string : ∀{m : ℕ} → 𝕍 ℕ m → string
-row-to-string = {!!}
+row-to-string [] = ""
+row-to-string (h :: []) = ℕ-to-string h
+row-to-string (h :: t) =  ℕ-to-string h ^ " " ^ row-to-string t
 
 {- 8 points.  Convert an n by m matrix to a string.  The format should
    be row1; row2; ...; rown, where each row looks like a1 a2 ... an.
    For an example, see test-matrix-to-string below -}
 matrix-to-string : ∀ {n m : ℕ} → n by m matrix → string
-matrix-to-string = {!!}
+matrix-to-string [] = ""
+matrix-to-string (h :: []) = row-to-string h
+matrix-to-string (h :: t) = row-to-string h ^ "; " ^ matrix-to-string t
 
 -- 2 points for passing this test case.
 test-matrix-to-string : matrix-to-string (zero-matrix 3 4) ≡ "0 0 0 0; 0 0 0 0; 0 0 0 0"
-test-matrix-to-string = {!!}
+test-matrix-to-string = refl
 
 {- 6 points. Return the i'th row of the matrix.  Hint: you can use the nth𝕍 function 
    from vector.agda -}
 matrix-row : ∀{n m : ℕ}(i : ℕ) → i < n ≡ tt → n by m matrix → 𝕍 ℕ m
-matrix-row = {!!} 
+matrix-row i p mat = nth𝕍 i p mat
 
 {- 7 points.  Get the element in row i, column j from the given n by m
    matrix, where i must be less than n and j less than m.  Hint: use
    matrix-row and nth𝕍. -}
 matrix-elt : ∀{n m : ℕ}(i j : ℕ) → i < n ≡ tt → j < m ≡ tt → n by m matrix → ℕ
-matrix-elt = {!!} 
+matrix-elt i j p q mat = nth𝕍 j q (matrix-row i p mat) 
 
 {- 0 points. This is a helper for identity-matrixh below.
    

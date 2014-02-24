@@ -8,11 +8,15 @@ open import lib
 
 -- 3 points
 xor-same : ∀ {b : 𝔹} → b xor b ≡ ff
-xor-same = {!!}
+xor-same {tt} = refl
+xor-same {ff} = refl
 
 -- 3 points
 xor-comm : ∀ {b1 b2 : 𝔹} → b1 xor b2 ≡ b2 xor b1
-xor-comm = {!!}
+xor-comm {tt} {tt} = refl
+xor-comm {tt} {ff} = refl
+xor-comm {ff} {tt} = refl
+xor-comm {ff} {ff} = refl
 
 ----------------------------------------------------------------------
 -- similar to hw2
@@ -20,11 +24,16 @@ xor-comm = {!!}
 
 -- 4 points
 +perm3 : ∀ (w x y z : ℕ) → (w + x) + (y + z) ≡ (w + y) + (x + z)
-+perm3 = {!!}
++perm3 0 x 0 z = refl
++perm3 (suc w) x 0 z rewrite +0 w | +assoc w x z = refl
++perm3 0 x (suc y) z rewrite +suc x (y + z) | +perm x y z = refl
++perm3 (suc w) x (suc y) z = {!!}
 
 -- 5 points
 parity-pow : ∀ (x y : ℕ) → iszero y ≡ ff → parity (x pow y) ≡ parity x
-parity-pow = {!!}
+parity-pow x 0 ()
+parity-pow x (suc 0) p rewrite *comm x 1 | +0 x = refl
+parity-pow x (suc y) p rewrite parity-pow x y p = {!!}
 
 -- 7 points (no one got this on hw2)
 *inj1 : ∀ {x y z : ℕ} → x ≢ 0 → x * y ≡ x * z → y ≡ z
