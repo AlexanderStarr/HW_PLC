@@ -50,20 +50,24 @@ matrix-elt i j p q mat = nth𝕍 j q (matrix-row i p mat)
    diagonal-𝕍 d n k should return the vector of length n that
    has value d at index k and 0 for every other element -}
 diagonal-𝕍 : (d n k : ℕ) → 𝕍 ℕ n
-diagonal-𝕍 = {!!}
+diagonal-𝕍 d 0 k = []
+diagonal-𝕍 d (suc n) k with (n =ℕ k)
+... | tt = d :: (diagonal-𝕍 d n k)
+... | ff = 0 :: (diagonal-𝕍 d n k)
 
 {- 0 points.  This is a helper for diagonal-matrix below.
 
    diagonal-matrixh should return the bottom m rows of the diagonal
    matrix with d along the diagonal -}
 diagonal-matrixh : (d n m : ℕ) → m by n matrix
-diagonal-matrixh = {!!} 
+diagonal-matrixh d n 0 = []
+diagonal-matrixh d n (suc m) = diagonal-𝕍 d n m :: diagonal-matrixh d n m
 
 {- 12 points. This should return the n by n diagonal matrix (all
    elements 0 except that we have value d down the diagonal from top
    left to bottom right) -}
 diagonal-matrix : (d : ℕ) → (n : ℕ) → n by n matrix
-diagonal-matrix = {!!}
+diagonal-matrix d n = diagonal-matrixh d n n
 
 identity-matrix : (n : ℕ) → n by n matrix
 identity-matrix n = diagonal-matrix 1 n
@@ -74,7 +78,7 @@ identity-matrix n = diagonal-matrix 1 n
 test-identity-matrix : identity-matrix 3 ≡ (1 :: 0 :: 0 :: []) :: 
                                            (0 :: 1 :: 0 :: []) :: 
                                            (0 :: 0 :: 1 :: []) :: []
-test-identity-matrix = {!!}
+test-identity-matrix = refl
 
 {- 10 points. Given a function f which takes an index i and a proof
    that i is less than n, return the vector of length n which looks

@@ -24,16 +24,13 @@ xor-comm {ff} {ff} = refl
 
 -- 4 points
 +perm3 : ∀ (w x y z : ℕ) → (w + x) + (y + z) ≡ (w + y) + (x + z)
-+perm3 0 x 0 z = refl
-+perm3 (suc w) x 0 z rewrite +0 w | +assoc w x z = refl
-+perm3 0 x (suc y) z rewrite +suc x (y + z) | +perm x y z = refl
-+perm3 (suc w) x (suc y) z = {!!}
++perm3 w x y z = {!!}
 
 -- 5 points
 parity-pow : ∀ (x y : ℕ) → iszero y ≡ ff → parity (x pow y) ≡ parity x
 parity-pow x 0 ()
 parity-pow x (suc 0) p rewrite *comm x 1 | +0 x = refl
-parity-pow x (suc y) p rewrite parity-pow x y p = {!!}
+parity-pow x (suc y) p = {!!}
 
 -- 7 points (no one got this on hw2)
 *inj1 : ∀ {x y z : ℕ} → x ≢ 0 → x * y ≡ x * z → y ≡ z
@@ -80,4 +77,10 @@ reverse𝕍 = {!!}
 -- 0 points.  This is a testcase for reverse𝕍
 reverse𝕍-test : reverse𝕍 (1 :: 2 :: 3 :: []) ≡ 3 :: 2 :: 1 :: []
 reverse𝕍-test = {!!}
+{-
+reverse-𝕍-helper : ∀ {ℓ}{A : Set ℓ}{n m : ℕ} → 𝕍 A n → 𝕍 A m → 𝕍 A m
+reverse-𝕍-helper h [] = h
+reverse-𝕍-helper h (x :: xs) = reverse-𝕍-helper (x :: h) xs
 
+reverse-𝕍 : ∀ {ℓ}{A : Set ℓ}{n : ℕ} → 𝕍 A n → 𝕍 A n
+reverse-𝕍 v = reverse-helper [] v-}
