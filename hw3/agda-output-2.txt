@@ -1,0 +1,55 @@
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole00.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole01.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole02.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole03.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole04.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole04.agda:7,16-26
+Not in scope:
+  reverse-++
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole04.agda:7,16-26
+when scope checking reverse-++
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole05.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole06.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole07.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole08.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole09.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole10.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole11.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole12.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole13.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole14.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole15.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole15.agda:7,19-32
+Not in scope:
+  decode-length
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole15.agda:7,19-32
+when scope checking decode-length
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole16.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole17.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole18.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole19.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole19.agda:8,19-32
+Not in scope:
+  encode-decode
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw3/hole19.agda:8,19-32
+when scope checking encode-decode
