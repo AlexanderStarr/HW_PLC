@@ -86,42 +86,6 @@ i<tot 0 (suc tot) p = refl
 i<tot (suc tot) 0 ()
 i<tot (suc i) (suc tot) p = i<tot i tot (0 < tot ≡ tt)-}
 
-{-init-𝕍-helper : ∀{ℓ}{A : Set ℓ} → (n i tot : ℕ) → (f : (i : ℕ) → i < tot ≡ tt → A) → 𝕍 A n
-init-𝕍-helper 0 i tot f = []
-init-𝕍-helper (suc n) i tot f = (f i (i < tot ≡ tt)) :: (init-𝕍-helper n (suc i) f)
-
-{- 10 points. Given a function f which takes an index i and a proof
-   that i is less than n, return the vector of length n which looks
-   like (f 0 p0) :: (f 1 p1) :: ... :: (f n-1 pn-1).  That is, the
-   i'th element of the vector is (f i pi), where pi is the proof that
-   i < n.  Hint: I found I had to write a helper function for this.
--}
-init-𝕍 : ∀{ℓ}{A : Set ℓ}{n : ℕ} → (f : (i : ℕ) → i < n ≡ tt → A) → 𝕍 A n
-init-𝕍 {l} {A} {n} f = init-𝕍-helper n 0 n f-}
-
-{- 10 points.  Given the number n of rows and m of columns for the new
-   matrix, and a function f, create a new matrix where the element at
-   row i, column j is (f i j).  Hint: use init-𝕍 twice.  
--}
-create-matrix : ∀{n m : ℕ} → (f : (i j : ℕ) → i < n ≡ tt → j < m ≡ tt → ℕ) → n by m matrix
-create-matrix = {!!}
-
--- 10 points: define matrix addition.  Hint: use create-matrix and matrix-elt
-_+matrix_ : ∀ {n m : ℕ} → n by m matrix → n by m matrix → n by m matrix
-x +matrix y = {!!}
-
--- 2 points for this test case
-test-+matrix : (identity-matrix 2) +matrix (zero-matrix 2 2) ≡ (identity-matrix 2)
-test-+matrix = {!!}
-
--- 2 points for this test case
-test-+matrix2 : (identity-matrix 3) +matrix (identity-matrix 3) ≡ (diagonal-matrix 2 3)
-test-+matrix2 = {!!}
-
--- 8 points: switch the rows and columns of the given matrix.  Hint: use create-matrix and matrix-elt.
-transpose : ∀{n m : ℕ} → n by m matrix → m by n matrix
-transpose = {!!}
-
 {- 8 points: compute the dot product of two vectors v and u, in the sense
    of linear algebra: (v_0 * u_0) + ... + (v_k-1 * u_k-1), where 
    v_0 :: ... :: v_k-1 :: 0 and u_0 :: ... :: u_k-1 :: 0 are the 
@@ -130,6 +94,3 @@ _·_ : ∀{k : ℕ} → 𝕍 ℕ k → 𝕍 ℕ k → ℕ
 [] · [] = 0
 (x :: xs) · (y :: ys) = (x * y) + (xs · ys)
 
--- 10 points, define matrix multiplication.  Hint: use matrix-row, _·_, and transpose.
-_*matrix_ : ∀{n k m : ℕ} → n by k matrix → k by m matrix → n by m matrix
-m *matrix m' = {!!}
