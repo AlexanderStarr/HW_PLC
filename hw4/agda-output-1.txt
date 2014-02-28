@@ -1,0 +1,130 @@
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole00.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole01.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole02.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole03.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole04.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole05.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole06.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole09.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole10.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole11.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole11.agda:6,6-12
+Not in scope:
+  init-𝕍
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole11.agda:6,6-12
+when scope checking init-𝕍
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole12.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole12.agda:6,6-19
+Not in scope:
+  create-matrix
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole12.agda:6,6-19
+when scope checking create-matrix
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole13.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole13.agda:6,82-89
+Not in scope:
+  +matrix
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole13.agda:6,82-89
+when scope checking +matrix
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole14.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole14.agda:7,38-45
+Not in scope:
+  +matrix
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole14.agda:7,38-45
+when scope checking +matrix
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole15.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole15.agda:6,39-46
+Not in scope:
+  +matrix
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole15.agda:6,39-46
+when scope checking +matrix
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole16.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole16.agda:6,6-15
+Not in scope:
+  transpose
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole16.agda:6,6-15
+when scope checking transpose
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole17.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole18.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole18.agda:6,47-54
+Not in scope:
+  *matrix
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/mat-hole18.agda:6,47-54
+when scope checking *matrix
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole00.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole01.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole02.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole03.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole03.agda:7,16-26
+Not in scope:
+  parity-pow
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole03.agda:7,16-26
+when scope checking parity-pow
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole04.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole05.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole05.agda:7,11-16
+Not in scope:
+  *inj1
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole05.agda:7,11-16
+when scope checking *inj1
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole06.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole06.agda:8,11-16
+Not in scope:
+  *inj2
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole06.agda:8,11-16
+when scope checking *inj2
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole07.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole07.agda:7,8-10
+Not in scope:
+  +∸
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole07.agda:7,8-10
+when scope checking +∸
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole08.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole09.agda
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole10.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole10.agda:7,13-20
+Not in scope:
+  ++-≡-[]
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole10.agda:7,13-20
+when scope checking ++-≡-[]
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole11.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole11.agda:7,17-28
+Not in scope:
+  map-reverse
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole11.agda:7,17-28
+when scope checking map-reverse
+---------------------------
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole12.agda
+/Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole12.agda:7,15-23
+Not in scope:
+  reverse𝕍
+  at /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw4/misc-hole12.agda:7,15-23
+when scope checking reverse𝕍
