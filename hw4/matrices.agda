@@ -80,11 +80,25 @@ test-identity-matrix : identity-matrix 3 ≡ (1 :: 0 :: 0 :: []) ::
                                            (0 :: 0 :: 1 :: []) :: []
 test-identity-matrix = refl
 
-{-i<tot : ∀ (i tot : ℕ) → 0 < tot ≡ tt → i < tot ≡ tt
-i<tot 0 0 ()
-i<tot 0 (suc tot) p = refl
-i<tot (suc tot) 0 ()
-i<tot (suc i) (suc tot) p = i<tot i tot (0 < tot ≡ tt)-}
+n+1suc : ∀ (n : ℕ) → n + 1 ≡ suc n
+n+1suc 0 = refl
+n+1suc (suc n) rewrite n+1suc n = refl
+
+init-𝕍-helper : ∀{ℓ}{A : Set ℓ}{m n : ℕ} → m < suc n ≡ tt → (f : (i : ℕ) → i < suc n ≡ tt → A) → 𝕍 A m
+init-𝕍-helper {l} {A} {0} {n} p f = []
+init-𝕍-helper {l} {A} {suc m} {n} p f rewrite sym (n+1suc m) with (<-suc-trans {m} {n} p)
+... | p' = (init-𝕍-helper {l} {A} {m} {n} p' f) ++𝕍 [ f m p' ]𝕍
+
+{- 10 points. Given a function f which takes an index i and a proof
+   that i is less than n, return the vector of length n which looks
+   like (f 0 p0) :: (f 1 p1) :: ... :: (f n-1 pn-1).  That is, the
+   i'th element of the vector is (f i pi), where pi is the proof that
+   i < n.  Hint: I found I had to write a helper function for this.
+-}
+init-𝕍 : ∀{ℓ}{A : Set ℓ}{n : ℕ} → (f : (i : ℕ) → i < n ≡ tt → A) → 𝕍 A n
+init-𝕍 {l} {A} {0} f = []
+init-𝕍 {l} {A} {suc n} f with (init-𝕍-helper {l} {A} {n} {n} (<-suc n) f) ++𝕍 [ f n (<-suc n) ]𝕍
+... | r rewrite (n+1suc n) = r
 
 {- 8 points: compute the dot product of two vectors v and u, in the sense
    of linear algebra: (v_0 * u_0) + ... + (v_k-1 * u_k-1), where 

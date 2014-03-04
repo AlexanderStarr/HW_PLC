@@ -45,8 +45,34 @@ repeat-++ : ∀{ℓ}{A : Set ℓ} (n m : ℕ) (a : A) → (repeat n a) ++ (repea
 repeat-++ 0 m a = refl
 repeat-++ (suc n) m a rewrite repeat-++ n m a = refl
 
+map-reverse-h : ∀{ℓ ℓ'}{A : Set ℓ}{B : Set ℓ'}(l1 l2 : 𝕃 A)(f : A → B) → map f (reverse-helper l1 l2) ≡ reverse-helper (map f l1) (map f l2)
+map-reverse-h l1 [] f = refl
+map-reverse-h l1 (h2 :: t2) f rewrite map-reverse-h (h2 :: l1) t2 f = refl
+
+-- 5 points
+map-reverse : ∀{ℓ ℓ'}{A : Set ℓ}{B : Set ℓ'}(l : 𝕃 A)(f : A → B) → map f (reverse l) ≡ reverse (map f l)
+map-reverse [] f = refl
+map-reverse (h :: t) f rewrite map-reverse-h (h :: []) t f = refl
+
 ----------------------------------------------------------------------
 -- one new one about vectors
 ----------------------------------------------------------------------
 
+𝕍+suc : ∀ {ℓ}{A : Set ℓ}(n m : ℕ) → 𝕍 A (m + suc n) ≡ 𝕍 A (suc (m + n))
+𝕍+suc n m rewrite +suc m n = refl
+
+-- Helper function for reverse𝕍
+reverse𝕍-helper : ∀ {ℓ}{A : Set ℓ}{n m : ℕ} → 𝕍 A n → 𝕍 A m → 𝕍 A (n + m)
+reverse𝕍-helper {l} {A} {n} {0} h [] rewrite +0 n = h
+reverse𝕍-helper {l} {A} {n} {suc m} h (x :: xs) rewrite +suc n m = reverse𝕍-helper (x :: h) xs
+
+{- 10 points. This function should reverse a vector,
+   similarly to the way the reverse function in list.agda
+   reverses a list-}
+reverse𝕍 : ∀{ℓ}{A : Set ℓ}{n : ℕ} → 𝕍 A n → 𝕍 A n
+reverse𝕍 {l} {A} {n} v = reverse𝕍-helper [] v
+
+-- 0 points.  This is a testcase for reverse𝕍
+reverse𝕍-test : reverse𝕍 (1 :: 2 :: 3 :: []) ≡ 3 :: 2 :: 1 :: []
+reverse𝕍-test = refl
 
