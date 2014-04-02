@@ -8,7 +8,6 @@ Syntactic
 
 Lexical
   chunk -> ('a' | 'ab' | 'ac').
-
   endchunk -> ('a' | 'b').
-
   maybe-nl => '\n'?.
+

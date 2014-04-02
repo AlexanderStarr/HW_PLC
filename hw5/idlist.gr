@@ -10,6 +10,6 @@ Syntactic
   termid -> id '\n'.
 
 Lexical
-  id -> ['a' - 'c'](['a' - 'c'] | ['1' - '3'])*.
-
+  id -> ['a' - 'z'](['a' - 'z'] | ['0' - '9'])*.
   maybe-nl -> '\n'?.
+
