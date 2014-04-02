@@ -1,0 +1,14 @@
+abca
+
+Start
+  start
+
+Syntactic
+  Frame : start -> chunk+ endchunk maybe-nl.
+
+Lexical
+  chunk -> ('a' | 'ab' | 'ac').
+
+  endchunk -> ('a' | 'b').
+
+  maybe-nl => '\n'?.
