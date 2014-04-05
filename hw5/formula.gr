@@ -1,0 +1,10 @@
+formula
+
+Start
+  start
+
+Syntactic
+  start -> (atomform | impform | uniquant) '\n'.
+
+Lexical
+  
