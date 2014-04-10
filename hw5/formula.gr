@@ -4,7 +4,20 @@ Start
   start
 
 Syntactic
-  start -> (atomform | impform | uniquant) '\n'.
+  Begin : start -> formula '\n'.
+  Paren : formula -> '(' formula ')'.
+  Atom : formula -> symb '(' csls ')'.
+  Imp : formula -> formula '→' formula.
+  Uniquant : formula -> '∀' space symb '.' formula.
 
 Lexical
-  
+  symb -> ['a' - 'c']+.
+  csymb -> symb ','.
+  csls -> (symb? | csymb+ symb).
+
+Vars
+  w x y z
+
+Rules
+  Imp(Uniquant(x,y),z) -> Uniquant(x,Imp(y,z))
+  Imp(Imp(x,y),z) -> Imp(x,Imp(y,z))
