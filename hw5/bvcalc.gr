@@ -10,12 +10,15 @@ Syntactic
   Negate : bv -> '~' ows bv.
   Shift : bv -> bv ows shiftop ows decnum.
   Infix : bv -> bv ows binop ows bv.
+  BAND : binop -> '&'.
+  BOR : binop -> '|'.
+  BXOR : binop -> '⊕'.
+  SLEFT : shiftop -> '≪'.
+  SRIGHT : shiftop -> '≫'.
 
 Lexical
   bvlit -> ('0' | '1')+.
   decnum -> ['0' - '9']+.
-  binop -> ('&' | '|' | '⊕').
-  shiftop -> ('≪' | '≫').
 
   ows => (space | '\n' | '\t')*.
   maybe-nl => '\n'?.
