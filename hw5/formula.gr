@@ -16,7 +16,7 @@ Lexical
   csls -> (symb? | csymb+ symb).
 
 Vars
-  w x y z
+  x y z
 
 Rules
   Imp(Uniquant(x,y),z) -> Uniquant(x,Imp(y,z))

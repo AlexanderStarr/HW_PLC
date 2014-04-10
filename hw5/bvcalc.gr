@@ -1,0 +1,30 @@
+bvcalc
+
+Start
+  start
+
+Syntactic
+  Init : start -> bv maybe-nl.
+  Lit : bv -> bvlit.
+  Paren : bv -> '(' ows bv ows ')'.
+  Negate : bv -> '~' ows bv.
+  Shift : bv -> bv ows shiftop ows decnum.
+  Infix : bv -> bv ows binop ows bv.
+
+Lexical
+  bvlit -> ('0' | '1')+.
+  decnum -> ['0' - '9']+.
+  binop -> ('&' | '|' | '⊕').
+  shiftop -> ('≪' | '≫').
+
+  ows => (space | '\n' | '\t')*.
+  maybe-nl => '\n'?.
+
+Vars
+  a b c d e
+
+Rules
+  Negate(Infix(a, b, c)) -> Infix(Negate(a), b, c)
+  Infix(Infix(a, b, c), d, e) -> Infix(a, b, Infix(c, d, e))
+  Negate(Shift(a, b, c)) -> Shift(Negate(a), b, c)
+  Shift(Infix(a, b, c), d, e) -> Infix(a, b, Shift(c, d, e))
