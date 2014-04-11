@@ -4,12 +4,9 @@ Start
   start
 
 Syntactic
-  start -> line+ maybe-nl.
-  line -> predid* termid.
+  start -> predid* termid.
   predid -> id ','.
   termid -> id '\n'.
 
 Lexical
   id -> ['a' - 'z'](['a' - 'z'] | ['0' - '9'])*.
-  maybe-nl -> '\n'?.
-

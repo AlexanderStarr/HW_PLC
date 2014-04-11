@@ -4,11 +4,10 @@ Start
   start
 
 Syntactic
-  Init : start -> appExpr maybe-nl.
+  Init : start -> appExpr '\n'.
 
 Lexical
   appExpr -> (symb | parExpr | term).
   parExpr -> '(' appExpr ')'.
   term -> appExpr space appExpr.
   symb -> ['a' - 'c']+.
-  maybe-nl => '\n'?.
