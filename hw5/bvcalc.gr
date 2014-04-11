@@ -4,7 +4,7 @@ Start
   start
 
 Syntactic
-  Init : start -> bv maybe-nl.
+  Init : start -> ows bv ows.
   Lit : bv -> bvlit.
   Paren : bv -> '(' ows bv ows ')'.
   Negate : bv -> '~' ows bv.
@@ -21,7 +21,6 @@ Lexical
   decnum -> ['0' - '9']+.
 
   ows => (space | '\n' | '\t')*.
-  maybe-nl => '\n'?.
 
 Vars
   a b c d e
