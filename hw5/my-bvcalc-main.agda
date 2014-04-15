@@ -57,16 +57,10 @@ shiftRh (h :: t) (suc n) = h :: (shiftRh t n)
 
 shiftR : (𝕃 char) → ℕ → string
 shiftR l 0 = 𝕃char-to-string l
-shiftR l n = 𝕃char-to-string ((repeat (if (n < (length l)) then n else (length l)) '0') ++ (shiftRh l (length l ∸ n)))
-
-shiftLh : (𝕃 char) → ℕ → ℕ → ℕ → (𝕃 char)
-shiftLh l 0 _ _ = l
-shiftLh [] snum count numsremoved = repeat numsremoved '0'
-shiftLh (h :: t) snum 0 numsremoved = (h :: t) ++ (repeat snum '0')
-shiftLh (h :: t) snum (suc count) numsremoved = shiftLh t snum count (suc numsremoved)
+shiftR l n = 𝕃char-to-string (if (n < (length l)) then (shiftRh l (length l ∸ n)) else ('0' :: []))
 
 shiftL : (𝕃 char) → ℕ → string
-shiftL l n = 𝕃char-to-string (shiftLh l n n 0)
+shiftL l n = 𝕃char-to-string (l ++ (repeat n '0'))
 
 eval-shift : (𝕃 char) → shiftop → (maybe ℕ) → string
 eval-shift _ _ nothing = "" -- This case just satisfies Agda's type checking.
