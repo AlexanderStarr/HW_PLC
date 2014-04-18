@@ -12,7 +12,10 @@ CommandsNext : commands -> command ws commands .
 
 Data : command -> dat .
 Declare : dat -> 'data' ws symb ws 'where' dbody .
-DataBody : dbody -> (ws (constr ws)* constr)? .
+EmptyDBody : dbody -> .
+NonEmptyDBody : dbody -> ws constrlist constr .
+EmptyCList : constrlist -> .
+CList : constrlist -> constrlist constr ws .
 Constr : constr -> symb ows ':' ows type .
 Type2Symb : type -> symb .
 Arrow : type -> type ows '->' ows type .
@@ -20,7 +23,10 @@ ParType : type -> '(' ows type ows ')' .
 
 Func : command -> fun .
 Defn : fun -> 'fun' ws symb ows ':' ows type fbody .
-FunBody : fbody -> (ws (eqn ws)* eqn)? .
+EmptyFBody : fbody -> .
+NonEmptyFBody : fbody -> ws eqnlist eqn .
+EmptyEList : eqnlist -> .
+EList : eqnlist -> eqnlist eqn ws .
 Eqn : eqn -> term ows '=' ows term ows '.' .
 Term2Symb : term -> symb .
 ParTerm : term -> '(' ows term ows ')' .
