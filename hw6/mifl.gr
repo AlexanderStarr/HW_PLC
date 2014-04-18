@@ -7,7 +7,24 @@ start
 Syntactic
 
 Strt : start -> ows commands ows .
-Symb : commands -> symb.
+CommandsStart : commands -> command .
+CommandsNext : commands -> command ws commands .
+
+Data : command -> dat .
+Declare : dat -> 'data' ws symb ws 'where' dbody .
+DataBody : dbody -> (ws (constr ws)* constr)? .
+Constr : constr -> symb ows ':' ows type .
+Type2Symb : type -> symb .
+Arrow : type -> type ows '->' ows type .
+ParType : type -> '(' ows type ows ')' .
+
+Func : command -> fun .
+Defn : fun -> 'fun' ws symb ows ':' ows type fbody .
+FunBody : fbody -> (ws (eqn ws)* eqn)? .
+Eqn : eqn -> term ows '=' ows term ows '.' .
+Term2Symb : term -> symb .
+ParTerm : term -> '(' ows term ows ')' .
+App : term -> term ws term .
 
 % add productions for the 'commands' nonterminal, and the rest of the grammar
 
@@ -19,4 +36,12 @@ aws => ('\n' | '\t' | space | ('%' (['a' - 'z' ] | space | ',' | ';')* '\n')).
 ws => aws+.
 ows => aws* .
 
+Vars
 
+x y z
+
+
+Rules
+
+Arrow(Arrow(x, y), z) -> Arrow(x,Arrow(y,z))
+App(x,App(y,z)) -> App(App(x,y),z)
