@@ -1,0 +1,375 @@
+Found alstarr/hw5 directory.
+agda.sh --no-termination-check --verbose=0 -i alstarr/hw5 -c alstarr/hw5/abca-main.agda >> alstarr/hw5/output-2.txt 2>&1
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes1.txt
+alstarr/hw5/abca-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes1.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes1.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes2.txt
+alstarr/hw5/abca-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes2.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes2.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes3.txt
+alstarr/hw5/abca-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes3.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes3.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes4.txt
+alstarr/hw5/abca-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes4.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes4.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes5.txt
+alstarr/hw5/abca-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes5.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes5.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes6.txt
+alstarr/hw5/abca-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes6.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-yes6.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no1.txt
+alstarr/hw5/abca-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no1.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no1.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no2.txt
+alstarr/hw5/abca-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no2.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no2.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no3.txt
+alstarr/hw5/abca-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no3.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no3.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no4.txt
+alstarr/hw5/abca-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no4.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/abca-no4.txt
+agda.sh --no-termination-check --verbose=0 -i alstarr/hw5 -c alstarr/hw5/idlist-main.agda >> alstarr/hw5/output-2.txt 2>&1
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes1.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes1.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes1.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes2.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes2.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes2.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes3.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes3.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes3.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes4.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes4.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes4.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes5.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes5.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes5.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes6.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes6.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes6.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes7.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes7.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes7.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes8.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes8.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-yes8.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no1.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no1.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no1.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no2.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no2.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no2.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no3.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no3.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no3.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no4.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no4.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no4.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no5.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no5.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no5.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no6.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no6.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no6.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no7.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no7.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no7.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no8.txt
+alstarr/hw5/idlist-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no8.txt
+0.625 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/idlist-no8.txt
+agda.sh --no-termination-check --verbose=0 -i alstarr/hw5 -c alstarr/hw5/expr-main.agda >> alstarr/hw5/output-2.txt 2>&1
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes1.txt
+alstarr/hw5/expr-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes1.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes1.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes2.txt
+alstarr/hw5/expr-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes2.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes2.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes3.txt
+alstarr/hw5/expr-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes3.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes3.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes4.txt
+alstarr/hw5/expr-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes4.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes4.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes5.txt
+alstarr/hw5/expr-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes5.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes5.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes6.txt
+alstarr/hw5/expr-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes6.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-yes6.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no1.txt
+alstarr/hw5/expr-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no1.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no1.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no2.txt
+alstarr/hw5/expr-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no2.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no2.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no3.txt
+alstarr/hw5/expr-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no3.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no3.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no4.txt
+alstarr/hw5/expr-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no4.txt
+1 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/expr-no4.txt
+agda.sh --no-termination-check --verbose=0 -i alstarr/hw5 -c alstarr/hw5/formula-main.agda >> alstarr/hw5/output-2.txt 2>&1
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes2-asc.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes2-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes2-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes3-asc.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes3-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes3-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes4-asc.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes4-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes4-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes5-asc.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes5-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes5-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes6-asc.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes6-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes6-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes7-asc.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes7-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes7-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes8-asc.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes8-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes8-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes1.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes1.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes1.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes2.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes2.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes2.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes3.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes3.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes3.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes4.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes4.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes4.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes5.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes5.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes5.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes6.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes6.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes6.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes7.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes7.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes7.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes8.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes8.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-yes8.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-no1.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-no1.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-no1.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-no2.txt
+alstarr/hw5/formula-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-no2.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/formula-no2.txt
+agda.sh --no-termination-check --verbose=0 -i alstarr/hw5 -c alstarr/hw5/bvcalc-main.agda >> alstarr/hw5/output-2.txt 2>&1
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes1-asc.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes1-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes1-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes2-asc.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes2-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes2-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes3-asc.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes3-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes3-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes4-asc.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes4-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes4-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes5-asc.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes5-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes5-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes6-asc.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes6-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes6-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes1.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes1.txt
+2.5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes1.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes2.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes2.txt
+2.5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes2.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes3.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes3.txt
+2.5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes3.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes4.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes4.txt
+2.5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes4.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes5.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes5.txt
+2.5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes5.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes6.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes6.txt
+2.5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-yes6.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-no1.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-no1.txt
+2.5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-no1.txt
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-no2.txt
+alstarr/hw5/bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-no2.txt
+2.5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-no2.txt
+agda.sh --no-termination-check --verbose=0 -i alstarr/hw5 -c alstarr/hw5/my-bvcalc-main.agda >> alstarr/hw5/output-2.txt 2>&1
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h1-asc.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h1-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h1-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h1.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h1.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h1.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h2-asc.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h2-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h2-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h2.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h2.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h2.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h3-asc.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h3-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h3-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h3.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h3.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h3.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h4-asc.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h4-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h4-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h4.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h4.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h4.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h5.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h5.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval-h5.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval1.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval1.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval1.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval10.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval10.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval10.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval2-asc.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval2-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval2-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval2.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval2.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval2.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval3.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval3.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval3.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval4.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval4.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval4.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval5-asc.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval5-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval5-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval5.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval5.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval5.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval6.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval6.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval6.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval7-asc.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval7-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval7-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval7.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval7.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval7.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval8-asc.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval8-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval8-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval8.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval8.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval8.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval9-asc.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval9-asc.txt
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval9-asc.txt
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval9.txt
+alstarr/hw5/my-bvcalc-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval9.txt
+2 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw5/bvcalc-eval9.txt
+------------------------------
+Testing completed.
+Final score is:
+100.000
