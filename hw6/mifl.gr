@@ -1,0 +1,22 @@
+mifl
+
+Start
+
+start
+
+Syntactic
+
+Strt : start -> ows commands ows .
+Symb : commands -> symb.
+
+% add productions for the 'commands' nonterminal, and the rest of the grammar
+
+Lexical
+
+symb -> ['a'-'z']+.
+
+aws => ('\n' | '\t' | space | ('%' (['a' - 'z' ] | space | ',' | ';')* '\n')).
+ws => aws+.
+ows => aws* .
+
+
