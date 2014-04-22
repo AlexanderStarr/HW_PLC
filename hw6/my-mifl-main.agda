@@ -8,9 +8,49 @@ module parsem = parse ptr state aut
 open parsem
 open parsem.parse rrs
 
+print-type : type → string
+print-type (Type2Symb s) = s
+print-type (ParType t) = "(" ^ (print-type t) ^ ")"
+print-type (Arrow t1 t2) = (print-type t1) ^ " -> " ^ (print-type t2)
+
+print-term : term → string
+print-term (Term2Symb s) = s
+print-term (ParTerm t) = "(" ^ (print-term t) ^ ")"
+print-term (App t1 t2) = (print-term t1) ^ " " ^ (print-term t2)
+
+print-constr : constr → string
+print-constr (Constr s t) = s ^ " : " ^ (print-type t)
+
+print-constrlist : constrlist → string
+print-constrlist (EmptyCList) = ""
+print-constrlist (CList cl c) = (print-constrlist cl) ^ (print-constr c) ^ "\n"
+
+print-dbody : dbody → string
+print-dbody (EmptyDBody) = ""
+print-dbody (NonEmptyDBody cl c) = "\n" ^ (print-constrlist cl) ^ (print-constr c)
+
+print-eqn : eqn → string
+print-eqn (Eqn t1 t2) = (print-term t1) ^ " = " ^ (print-term t2) ^ " ."
+
+print-eqnlist : eqnlist → string
+print-eqnlist (EmptyEList) = ""
+print-eqnlist (EList el e) = (print-eqnlist el) ^ (print-eqn e) ^ "\n"
+
+print-fbody : fbody → string
+print-fbody (EmptyFBody) = ""
+print-fbody (NonEmptyFBody el e) = "\n" ^ (print-eqnlist el) ^ (print-eqn e)
+
+print-command : command → string
+print-command (Data (Declare s db)) = "data " ^ s ^ " where" ^ (print-dbody db)
+print-command (Func (Defn s t fb)) = "fun " ^ s ^ " : " ^ (print-type t) ^ (print-fbody fb)
+
+print-commands : commands → string
+print-commands (CommandsStart c) = print-command c
+print-commands (CommandsNext c cs) = (print-command c) ^ "\n\n" ^ (print-commands cs)
+
 print-Mifl : 𝔹 → start → string
 print-Mifl ff s = ""
-print-Mifl b s = "PRINTING MIFL\n"
+print-Mifl tt (Strt c) = "\n" ^ (print-commands c) ^ "\n"
 
 check-Types : 𝔹 → start → string
 check-Types ff s = ""
@@ -18,7 +58,7 @@ check-Types b s = "CHECKING TYPES\n"
 
 emit-Java : 𝔹 → start → string
 emit-Java ff s = ""
-emit-Java b s = "EMITTING JAVA\n"
+emit-Java tt (Strt c) = "EMITTING JAVA\n"
 
 process-start : 𝔹 → 𝔹 → 𝔹 → start → string
 process-start pM cT eJ s = (print-Mifl pM s) ^ (check-Types cT s) ^ (emit-Java eJ s)
