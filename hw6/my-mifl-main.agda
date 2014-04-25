@@ -126,9 +126,35 @@ emit-dbody (NonEmptyDBody cl c) = (emit-constrlist cl 1) ^ (emit-constr c 0)
 emit-data : symb → dbody → string
 emit-data s d = "public static abstract class " ^ s ^ " {\n" ^ (emit-dbody d) ^ "public abstract int getTag();}\n" ^ (emit-constr-defs s d)
 
+emit-return-type : type → string
+emit-return-type (Type2Symb s) = s
+emit-return-type (ParType t) = emit-return-type t
+emit-return-type (Arrow t1 t2) = emit-return-type t2
+
+emit-fun-def : fbody → string
+emit-fun-def f = ""
+
+get-input-type : type → type → type
+get-input-type t1 (Type2Symb t2) = t1
+get-input-type t1 (ParType t2) = get-input-type t1 t2
+get-input-type t1 (Arrow t2 t3) = (Arrow t1 (get-input-type t2 t3))
+
+emit-input : type → ℕ → string
+emit-input (Type2Symb s) n = s ^ " x" ^ (ℕ-to-string n)
+emit-input (ParType t) n = emit-input t n
+emit-input (Arrow t1 t2) n = (emit-input t1 n) ^ ", " ^ (emit-input t2 (suc n))
+
+emit-inputs : type → string
+emit-inputs (Type2Symb s) = ""
+emit-inputs (ParType t) = emit-inputs t
+emit-inputs (Arrow t1 t2) = emit-input (get-input-type t1 t2) 0
+
+emit-fun : symb → type → fbody → string
+emit-fun s t f = "public static " ^ (emit-return-type t) ^ " " ^ s ^ "(" ^ (emit-inputs t) ^ ") {\n" ^ (emit-fun-def f) ^ "\n}"
+
 emit-command : command → string
 emit-command (Data (Declare s db)) = emit-data s db
-emit-command (Func (Defn s t fb)) = "function definition"
+emit-command (Func (Defn s t fb)) = emit-fun s t fb
 
 emit-commands : commands → string
 emit-commands (CommandsStart c) = emit-command c 
