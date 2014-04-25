@@ -57,6 +57,64 @@ print-Mifl : 𝔹 → start → string
 print-Mifl ff s = ""
 print-Mifl tt (Strt c) = "\n" ^ (print-commands c) ^ "\n"
 
+-----------------------------------
+-- Code for the printMinMifl option
+-----------------------------------
+
+dropParensType : type → type
+dropParensType (Arrow t1 (ParType (Arrow t2 t3))) = (dropParensType((Arrow t1 (Arrow t2 t3))))
+dropParensType (Arrow t1 t2) = (Arrow (dropParensType t1) (dropParensType t2))
+dropParensType (ParType (ParType t)) = (dropParensType (ParType t))
+dropParensType (ParType (Type2Symb s)) = (Type2Symb s)
+dropParensType (ParType t) = (ParType (dropParensType t))
+dropParensType (Type2Symb s) = (Type2Symb s)
+
+dropParensConstr : constr → constr
+dropParensConstr (Constr s t) = (Constr s (dropParensType t))
+
+dropParensConstrs : constrlist → constrlist
+dropParensConstrs (EmptyCList) = EmptyCList
+dropParensConstrs (CList cl c) = (CList (dropParensConstrs cl) (dropParensConstr c))
+
+dropParensTerm : term → term
+dropParensTerm (App (ParTerm (App t1 t2)) t3) = (dropParensTerm (App (App t1 t2) t3))
+dropParensTerm (App t1 t2) = (App (dropParensTerm t1) (dropParensTerm t2))
+dropParensTerm (ParTerm (ParTerm t)) = (dropParensTerm (ParTerm t))
+dropParensTerm (ParTerm (Term2Symb s)) = (Term2Symb s)
+dropParensTerm (ParTerm t) = (ParTerm (dropParensTerm t))
+dropParensTerm (Term2Symb s) = (Term2Symb s)
+
+dropParensEqn : eqn → eqn
+dropParensEqn (Eqn t1 t2) = (Eqn (dropParensTerm t1) (dropParensTerm t2))
+
+dropParensEqns : eqnlist → eqnlist
+dropParensEqns (EmptyEList) = (EmptyEList)
+dropParensEqns (EList el e) = (EList (dropParensEqns el) (dropParensEqn e))
+
+dropParensFBody : fbody → fbody
+dropParensFBody (EmptyFBody) = (EmptyFBody)
+dropParensFBody (NonEmptyFBody el e) = (NonEmptyFBody (dropParensEqns el) (dropParensEqn e)) 
+
+dropParensCom : command → command
+dropParensCom (Data (Declare s (NonEmptyDBody cl c))) = (Data (Declare s (NonEmptyDBody (dropParensConstrs cl) (dropParensConstr c))))
+dropParensCom (Func (Defn s t fb)) = (Func (Defn s (dropParensType t) (dropParensFBody fb)))
+dropParensCom c = c
+
+dropParensComs : commands → commands
+dropParensComs (CommandsStart c) = (CommandsStart (dropParensCom c))
+dropParensComs (CommandsNext c cs) = (CommandsNext (dropParensCom c) (dropParensComs cs))
+
+dropParens : start → start
+dropParens (Strt c) = (Strt (dropParensComs c))
+
+print-Min-Mifl : 𝔹 → start → string
+print-Min-Mifl ff s = ""
+print-Min-Mifl tt s = (print-Mifl tt (dropParens s))
+
+---------------------------------
+-- Code for the checkTypes option
+---------------------------------
+
 check-Types : 𝔹 → start → string
 check-Types ff s = ""
 check-Types b s = "CHECKING TYPES\n"
@@ -222,35 +280,36 @@ emit-Java tt (Strt c) = "\n public class output {\n" ^ (emit-commands c (get-dat
 -- Code for process-start and other emitted code
 ---------------------------------
 
-process-start : 𝔹 → 𝔹 → 𝔹 → start → string
-process-start pM cT eJ s = (print-Mifl pM s) ^ (check-Types cT s) ^ (emit-Java eJ s)
+process-start : 𝔹 → 𝔹 → 𝔹 → 𝔹 → start → string
+process-start pM cT eJ pMM s = (print-Mifl pM s) ^ (print-Min-Mifl pMM s) ^ (check-Types cT s) ^ (emit-Java eJ s)
 
-process : 𝔹 → 𝔹 → 𝔹 → Run → string
-process printMifl checkTypes emitJava (_ :: _ :: ParseTree (parsed-start p) :: _ :: _ :: []) = process-start printMifl checkTypes emitJava p
-process printMifl checkTypes emitJava r = "Parsing failure (run with -" ^ "-showParsed).\n"
+process : 𝔹 → 𝔹 → 𝔹 → 𝔹 → Run → string
+process printMifl checkTypes emitJava printMinMifl (_ :: _ :: ParseTree (parsed-start p) :: _ :: _ :: []) = process-start printMifl checkTypes emitJava printMinMifl p
+process printMifl checkTypes emitJava printMinMifl r = "Parsing failure (run with -" ^ "-showParsed).\n"
 
 putStrRunIf : 𝔹 → Run → IO ⊤
 putStrRunIf tt r = putStr (Run-to-string r) >> putStr "\n"
 putStrRunIf ff r = return triv
 
-processArgs : (showRun : 𝔹) → (showParsed : 𝔹) → (printMifl : 𝔹) → (checkTypes : 𝔹) → (emitJava : 𝔹) → 𝕃 string → IO ⊤ 
-processArgs showRun showParsed printMifl checkTypes emitJava (x :: []) = (readFiniteFile x) >>= processText
+processArgs : (showRun : 𝔹) → (showParsed : 𝔹) → (printMifl : 𝔹) → (checkTypes : 𝔹) → (emitJava : 𝔹) → (printMinMifl : 𝔹) → 𝕃 string → IO ⊤ 
+processArgs showRun showParsed printMifl checkTypes emitJava printMinMifl (x :: []) = (readFiniteFile x) >>= processText
   where processText : string → IO ⊤
         processText x with runAut x
         processText x | s with s
         processText x | s | inj₁ _ = putStr (runState-to-string s) >> putStr "\nCannot proceed to parsing.\n"
         processText x | s | inj₂ r with putStrRunIf showRun r | rewriteRun r
         processText x | s | inj₂ r | sr | r' with putStrRunIf showParsed r'
-        processText x | s | inj₂ r | sr | r' | sr' = sr >> sr' >> putStr (process printMifl checkTypes emitJava r')
+        processText x | s | inj₂ r | sr | r' | sr' = sr >> sr' >> putStr (process printMifl checkTypes emitJava printMinMifl r')
                                      
-processArgs showRun showParsed printMifl checkTypes emitJava ("--showRun" :: xs) = processArgs tt showParsed  printMifl checkTypes emitJava xs 
-processArgs showRun showParsed printMifl checkTypes emitJava ("--showParsed" :: xs) = processArgs showRun tt printMifl checkTypes emitJava xs 
-processArgs showRun showParsed printMifl checkTypes emitJava ("--printMifl" :: xs) = processArgs showRun showParsed tt checkTypes emitJava xs
-processArgs showRun showParsed printMifl checkTypes emitJava ("--checkTypes" :: xs) = processArgs showRun showParsed printMifl tt emitJava xs
-processArgs showRun showParsed printMifl checkTypes emitJava ("--emitJava" :: xs) = processArgs showRun showParsed printMifl checkTypes tt xs
-processArgs showRun showParsed printMifl checkTypes emitJava (x :: xs) = putStr ("Unknown option " ^ x ^ "\n")
-processArgs showRun showParsed printMifl checkTypes emitJava [] = putStr "Please run with the name of a file to process.\n"
+processArgs showRun showParsed printMifl checkTypes emitJava printMinMifl ("--showRun" :: xs) = processArgs tt showParsed  printMifl checkTypes emitJava printMinMifl xs 
+processArgs showRun showParsed printMifl checkTypes emitJava printMinMifl ("--showParsed" :: xs) = processArgs showRun tt printMifl checkTypes emitJava printMinMifl xs 
+processArgs showRun showParsed printMifl checkTypes emitJava printMinMifl ("--printMifl" :: xs) = processArgs showRun showParsed tt checkTypes emitJava printMinMifl xs
+processArgs showRun showParsed printMifl checkTypes emitJava printMinMifl ("--checkTypes" :: xs) = processArgs showRun showParsed printMifl tt emitJava printMinMifl xs
+processArgs showRun showParsed printMifl checkTypes emitJava printMinMifl ("--emitJava" :: xs) = processArgs showRun showParsed printMifl checkTypes tt printMinMifl xs
+processArgs showRun showParsed printMifl checkTypes emitJava printMinMifl ("--printMinMifl" :: xs) = processArgs showRun showParsed printMifl checkTypes emitJava tt xs
+processArgs showRun showParsed printMifl checkTypes emitJava printMinMifl (x :: xs) = putStr ("Unknown option " ^ x ^ "\n")
+processArgs showRun showParsed printMifl checkTypes emitJava printMinMifl [] = putStr "Please run with the name of a file to process.\n"
 
 main : IO ⊤
-main = getArgs >>= processArgs ff ff ff ff ff
+main = getArgs >>= processArgs ff ff ff ff ff ff
 
