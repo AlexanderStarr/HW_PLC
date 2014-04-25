@@ -2,6 +2,7 @@ module my-mifl-main where
 
 import parse
 open import lib
+open import trie
 open import mifl
 
 module parsem = parse ptr state aut
@@ -131,8 +132,49 @@ emit-return-type (Type2Symb s) = s
 emit-return-type (ParType t) = emit-return-type t
 emit-return-type (Arrow t1 t2) = emit-return-type t2
 
-emit-fun-def : fbody → string
-emit-fun-def f = ""
+maybe-elim : (maybe string) → string
+maybe-elim nothing = ""
+maybe-elim (just string) = string
+
+has-constr : term → (trie string) → 𝔹
+has-constr (App t1 t2) tr = (has-constr t1 tr) || (has-constr t2 tr)
+has-constr (ParTerm t) tr = has-constr t tr
+has-constr (Term2Symb s) tr with trie-lookup tr s
+has-constr (Term2Symb s) tr | nothing = ff
+has-constr (Term2Symb s) tr | just x = tt
+
+emit-assigns : term → (trie string) → string
+emit-assigns t tr = "assignment\n"
+
+term-to-symb : term → symb
+term-to-symb (Term2Symb s) =  s
+term-to-symb (ParTerm t) = term-to-symb t
+term-to-symb (App t1 t2) = term-to-symb t2
+
+emit-return-constrs : term → (trie string) → string
+emit-return-constrs (App t1 t2) tr = (emit-return-constrs t1 tr) ^ "(" ^ (emit-return-constrs t2 tr) ^ (if (has-constr t2 tr) then "()" else "") ^ ")"
+emit-return-constrs (ParTerm t) tr = emit-return-constrs t tr
+emit-return-constrs t tr = (if (has-constr t tr) then ("new " ^ (term-to-symb t)) else (term-to-symb t))
+
+emit-return : term → term → (trie string) → string
+emit-return t1 t2 tr = "return " ^ (emit-return-constrs t2 tr) ^ ";\n"
+
+create-con : term → (trie string) → string
+create-con t tr = " == "
+
+emit-con : term → term → (trie string) → string
+emit-con t1 t2 tr = "if (" ^ (create-con t1 tr) ^ ") {\n" ^ (emit-assigns t1 tr) ^ (emit-return t1 t2 tr)
+
+emit-eqn : eqn → (trie string) → string
+emit-eqn (Eqn t1 t2) tr = if (has-constr t1 tr) then ((emit-con t1 t2 tr)) else (emit-return t1 t2 tr)
+
+emit-eqnlist : eqnlist → (trie string) → string
+emit-eqnlist (EmptyEList) tr = ""
+emit-eqnlist (EList el e) tr = (emit-eqnlist el tr) ^ (emit-eqn e tr)
+
+emit-fbody : fbody → (trie string) → string
+emit-fbody (EmptyFBody) tr = ""
+emit-fbody (NonEmptyFBody el e) tr = (emit-eqnlist el tr) ^ (emit-eqn e tr)
 
 get-input-type : type → type → type
 get-input-type t1 (Type2Symb t2) = t1
@@ -149,20 +191,32 @@ emit-inputs (Type2Symb s) = ""
 emit-inputs (ParType t) = emit-inputs t
 emit-inputs (Arrow t1 t2) = emit-input (get-input-type t1 t2) 0
 
-emit-fun : symb → type → fbody → string
-emit-fun s t f = "public static " ^ (emit-return-type t) ^ " " ^ s ^ "(" ^ (emit-inputs t) ^ ") {\n" ^ (emit-fun-def f) ^ "\n}"
+emit-fun : symb → type → fbody → (trie string) → string
+emit-fun s t f tr = "public static " ^ (emit-return-type t) ^ " " ^ s ^ "(" ^ (emit-inputs t) ^ ") {\n" ^ (emit-fbody f tr) ^ "\n}"
 
-emit-command : command → string
-emit-command (Data (Declare s db)) = emit-data s db
-emit-command (Func (Defn s t fb)) = emit-fun s t fb
+emit-command : command → (trie string) → string
+emit-command (Data (Declare s db)) tr = emit-data s db
+emit-command (Func (Defn s t fb)) tr = emit-fun s t fb tr
 
-emit-commands : commands → string
-emit-commands (CommandsStart c) = emit-command c 
-emit-commands (CommandsNext c cs) = (emit-command c) ^ "\n" ^ (emit-commands cs)
+emit-commands : commands → (trie string) → string
+emit-commands (CommandsStart c) t = emit-command c t
+emit-commands (CommandsNext c cs) t = (emit-command c t) ^ "\n" ^ (emit-commands cs t)
+
+add-constr-to-trie : symb → constr → (trie string) → (trie string)
+add-constr-to-trie s1 (Constr s2 t) tr = trie-insert tr s2 s1
+
+add-constrs-to-trie : symb → constrlist → (trie string) → (trie string)
+add-constrs-to-trie s (EmptyCList) tr = tr
+add-constrs-to-trie s (CList cs c) tr = add-constrs-to-trie s cs (add-constr-to-trie s c tr)
+
+get-data-trie : commands → (trie string) → (trie string)
+get-data-trie (CommandsStart (Data (Declare s (NonEmptyDBody cs c)))) tr = add-constrs-to-trie s cs (add-constr-to-trie s c tr)
+get-data-trie (CommandsNext (Data (Declare s (NonEmptyDBody cs c))) coms) tr = get-data-trie coms (add-constrs-to-trie s cs (add-constr-to-trie s c tr))
+get-data-trie _ tr = tr
 
 emit-Java : 𝔹 → start → string
 emit-Java ff s = ""
-emit-Java tt (Strt c) = "\n public class output {\n" ^ (emit-commands c) ^ "\n}\n"
+emit-Java tt (Strt c) = "\n public class output {\n" ^ (emit-commands c (get-data-trie c (empty-trie))) ^ "\n}\n"
 
 ---------------------------------
 -- Code for process-start and other emitted code
