@@ -119,17 +119,25 @@ data typeInfo : Set where
   isData : typeInfo
   hasType : type → typeInfo
 
-update-trie-db : dbody → (trie typeInfo) → (trie typeInfo)
-update-trie-db db tr = tr
-
-update-trie : command → (trie typeInfo) → (trie typeInfo)
-update-trie (Data (Declare s db)) tr = update-trie-db db (trie-insert tr s (isData))
-update-trie (Func (Defn s t fb)) tr = tr
-
 symb-in-trie : symb → (trie typeInfo) → 𝔹
 symb-in-trie s tr with trie-lookup tr s
 symb-in-trie s tr | nothing = ff
 symb-in-trie s tr | just tI = tt
+
+update-trie-c : constr → (trie typeInfo) → (trie typeInfo)
+update-trie-c (Constr s t) tr = (trie-insert tr s (isData))
+
+update-trie-cs : constrlist → (trie typeInfo) → (trie typeInfo)
+update-trie-cs (EmptyCList) tr = tr
+update-trie-cs (CList cs c) tr = (update-trie-cs cs (update-trie-c c tr))
+
+update-trie-db : dbody → (trie typeInfo) → (trie typeInfo)
+update-trie-db (EmptyDBody) tr = tr
+update-trie-db (NonEmptyDBody cs c) tr = (update-trie-cs cs (update-trie-c c tr))
+
+update-trie : command → (trie typeInfo) → (trie typeInfo)
+update-trie (Data (Declare s db)) tr = update-trie-db db (trie-insert tr s (isData))
+update-trie (Func (Defn s t fb)) tr = tr
 
 check-type-type : type → (trie typeInfo) → 𝔹
 check-type-type (Type2Symb s) tr = symb-in-trie s tr
@@ -152,9 +160,20 @@ check-db : string → dbody → (trie typeInfo) → 𝔹
 check-db s1 (EmptyDBody) tr = tt
 check-db s1 (NonEmptyDBody cs (Constr s2 t)) tr = (check-constr s1 (Constr s2 t) tr) && (check-constrs s1 cs (trie-insert tr s2 (isData)))
 
+check-eqn : string → eqn → (trie typeInfo) → 𝔹
+check-eqn s e tr = tt
+
+check-elist : string → eqnlist → (trie typeInfo) → 𝔹
+check-elist s (EmptyEList) tr = tt
+check-elist s (EList el e) tr = (check-eqn s e tr) && (check-elist s el tr)
+
+check-fb : string → fbody → (trie typeInfo) → 𝔹
+check-fb s (EmptyFBody) tr = tt
+check-fb s (NonEmptyFBody es e) tr = (check-eqn s e tr) && (check-elist s es tr)
+
 check-command : command → (trie typeInfo) → 𝔹
 check-command (Data (Declare s db)) tr = (~ (symb-in-trie s tr)) && (check-db s db (trie-insert tr s (isData)))
-check-command (Func (Defn s t fb)) tr = tt
+check-command (Func (Defn s t fb)) tr = (~ (symb-in-trie s tr)) && (check-type-type t tr) && (check-fb s fb (trie-insert tr s (hasType t)))
 
 check-commands : commands → (trie typeInfo) → 𝔹
 check-commands (CommandsStart c) tr = check-command c tr
