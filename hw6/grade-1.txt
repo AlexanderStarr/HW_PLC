@@ -1,0 +1,94 @@
+Found alstarr/hw6 directory.
+agda.sh --no-termination-check --verbose=0 -i alstarr/hw6 -c alstarr/hw6/mifl-main.agda >> alstarr/hw6/output-1.txt 2>&1
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/empty.mifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/empty.mifl
+7 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/empty.mifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list.mifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list.mifl
+7 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list.mifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat.mifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat.mifl
+7 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat.mifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/simpleNat.mifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/simpleNat.mifl
+7 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/simpleNat.mifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test1.mifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test1.mifl
+5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test1.mifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test2.mifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test2.mifl
+5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test2.mifl
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list1.notmifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list1.notmifl
+4 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list1.notmifl
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat1.notmifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat1.notmifl
+4 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat1.notmifl
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat2.notmifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat2.notmifl
+4 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat2.notmifl
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test3.notmifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test3.notmifl
+5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test3.notmifl
+------------------------------
+Running negative test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test4.notmifl
+alstarr/hw6/mifl-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test4.notmifl
+5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test4.notmifl
+agda.sh --no-termination-check --verbose=0 -i alstarr/hw6 -c alstarr/hw6/my-mifl-main.agda >> alstarr/hw6/output-1.txt 2>&1
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list.pmifl
+alstarr/hw6/my-mifl-main --printMifl /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list.pmifl
+5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list.pmifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat.pmifl
+alstarr/hw6/my-mifl-main --printMifl /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat.pmifl
+5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat.pmifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/simpleNat.pmifl
+alstarr/hw6/my-mifl-main --printMifl /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/simpleNat.pmifl
+5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/simpleNat.pmifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test1.pmifl
+alstarr/hw6/my-mifl-main --printMifl /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test1.pmifl
+5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test1.pmifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test2.pmifl
+alstarr/hw6/my-mifl-main --printMifl /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test2.pmifl
+5 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test2.pmifl
+------------------------------
+test verification
+no points for type checking due to failing the verification test.
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list.cmifl
+alstarr/hw6/my-mifl-main --emitJava /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list.cmifl
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/list.cmifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat.cmifl
+alstarr/hw6/my-mifl-main --emitJava /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat.cmifl
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/nat.cmifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/simpleNat.cmifl
+alstarr/hw6/my-mifl-main --emitJava /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/simpleNat.cmifl
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/simpleNat.cmifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test1.cmifl
+alstarr/hw6/my-mifl-main --emitJava /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test1.cmifl
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test1.cmifl
+------------------------------
+Running test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test2.cmifl
+alstarr/hw6/my-mifl-main --emitJava /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test2.cmifl
+0 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw6/test2.cmifl
+------------------------------
+Testing completed.
+Final score is:
+85
