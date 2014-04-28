@@ -115,9 +115,57 @@ print-Min-Mifl tt s = (print-Mifl tt (dropParens s))
 -- Code for the checkTypes option
 ---------------------------------
 
+data typeInfo : Set where
+  isData : typeInfo
+  hasType : type → typeInfo
+
+update-trie-db : dbody → (trie typeInfo) → (trie typeInfo)
+update-trie-db db tr = tr
+
+update-trie : command → (trie typeInfo) → (trie typeInfo)
+update-trie (Data (Declare s db)) tr = update-trie-db db (trie-insert tr s (isData))
+update-trie (Func (Defn s t fb)) tr = tr
+
+symb-in-trie : symb → (trie typeInfo) → 𝔹
+symb-in-trie s tr with trie-lookup tr s
+symb-in-trie s tr | nothing = ff
+symb-in-trie s tr | just tI = tt
+
+check-type-type : type → (trie typeInfo) → 𝔹
+check-type-type (Type2Symb s) tr = symb-in-trie s tr
+check-type-type (ParType t) tr = check-type-type t tr
+check-type-type (Arrow t1 t2) tr = (check-type-type t1 tr) && (check-type-type t2 tr)
+
+check-constr-type : string → type → (trie typeInfo) → 𝔹
+check-constr-type s1 (Type2Symb s2) tr = (s1 =string s2)
+check-constr-type s1 (ParType t) tr = check-constr-type s1 t tr
+check-constr-type s1 (Arrow t1 t2) tr = (check-type-type t1 tr) && (check-constr-type s1 t2 tr)
+
+check-constr : string → constr → (trie typeInfo) → 𝔹
+check-constr s1 (Constr s2 t) tr = (~ (symb-in-trie s2 tr)) && (check-constr-type s1 t tr)
+
+check-constrs : string → constrlist → (trie typeInfo) → 𝔹
+check-constrs s1 (EmptyCList) tr = tt
+check-constrs s1 (CList cs (Constr s2 t)) tr = (check-constr s1 (Constr s2 t) tr) && (check-constrs s1 cs (trie-insert tr s2 (isData)))
+
+check-db : string → dbody → (trie typeInfo) → 𝔹
+check-db s1 (EmptyDBody) tr = tt
+check-db s1 (NonEmptyDBody cs (Constr s2 t)) tr = (check-constr s1 (Constr s2 t) tr) && (check-constrs s1 cs (trie-insert tr s2 (isData)))
+
+check-command : command → (trie typeInfo) → 𝔹
+check-command (Data (Declare s db)) tr = (~ (symb-in-trie s tr)) && (check-db s db (trie-insert tr s (isData)))
+check-command (Func (Defn s t fb)) tr = tt
+
+check-commands : commands → (trie typeInfo) → 𝔹
+check-commands (CommandsStart c) tr = check-command c tr
+check-commands (CommandsNext c cs) tr = (check-command c tr) && (check-commands cs (update-trie c tr))
+
+is-type-correct : start → 𝔹
+is-type-correct (Strt c) = check-commands c (empty-trie)
+
 check-Types : 𝔹 → start → string
 check-Types ff s = ""
-check-Types b s = "CHECKING TYPES\n"
+check-Types b s = if (is-type-correct s) then "" else "type error\n"
 
 -------------------------------
 -- Code for the emitJava option
