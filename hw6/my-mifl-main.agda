@@ -332,6 +332,7 @@ emit-inputs (ParType t) = emit-inputs t
 emit-inputs (Arrow t1 t2) = emit-input (get-input-type t1 t2) 0
 
 emit-fun : symb → type → fbody → (trie string) → string
+emit-fun "main" t (NonEmptyFBody el (Eqn t1 t2)) tr = "public static void main(String[] args) {\n" ^ (emit-return-type t) ^ " main = " ^ (emit-return-constrs t2 tr) ^ ";\n System.out.println(main.toString());\n}"
 emit-fun s t f tr = "public static " ^ (emit-return-type t) ^ " " ^ s ^ "(" ^ (emit-inputs t) ^ ") {\n" ^ (emit-fbody f tr) ^ "\n}"
 
 emit-command : command → (trie string) → string
