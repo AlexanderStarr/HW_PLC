@@ -117,6 +117,7 @@ print-Min-Mifl tt s = (print-Mifl tt (dropParens s))
 
 data typeInfo : Set where
   isData : typeInfo
+  isConstr : symb → typeInfo
   hasType : type → typeInfo
 
 symb-in-trie : symb → (trie typeInfo) → 𝔹
@@ -124,23 +125,28 @@ symb-in-trie s tr with trie-lookup tr s
 symb-in-trie s tr | nothing = ff
 symb-in-trie s tr | just tI = tt
 
-update-trie-c : constr → (trie typeInfo) → (trie typeInfo)
-update-trie-c (Constr s t) tr = (trie-insert tr s (isData))
+is-dat : symb → (trie typeInfo) → 𝔹
+is-dat s tr with trie-lookup tr s
+is-dat s tr | just (isData) = tt
+is-dat s tr | _ = ff
 
-update-trie-cs : constrlist → (trie typeInfo) → (trie typeInfo)
-update-trie-cs (EmptyCList) tr = tr
-update-trie-cs (CList cs c) tr = (update-trie-cs cs (update-trie-c c tr))
+update-trie-c : symb → constr → (trie typeInfo) → (trie typeInfo)
+update-trie-c s1 (Constr s2 t) tr = (trie-insert tr s2 (isConstr s1))
 
-update-trie-db : dbody → (trie typeInfo) → (trie typeInfo)
-update-trie-db (EmptyDBody) tr = tr
-update-trie-db (NonEmptyDBody cs c) tr = (update-trie-cs cs (update-trie-c c tr))
+update-trie-cs : symb → constrlist → (trie typeInfo) → (trie typeInfo)
+update-trie-cs s (EmptyCList) tr = tr
+update-trie-cs s (CList cs c) tr = (update-trie-cs s cs (update-trie-c s c tr))
+
+update-trie-db : symb → dbody → (trie typeInfo) → (trie typeInfo)
+update-trie-db s (EmptyDBody) tr = tr
+update-trie-db s (NonEmptyDBody cs c) tr = (update-trie-cs s cs (update-trie-c s c tr))
 
 update-trie : command → (trie typeInfo) → (trie typeInfo)
-update-trie (Data (Declare s db)) tr = update-trie-db db (trie-insert tr s (isData))
+update-trie (Data (Declare s db)) tr = update-trie-db s db (trie-insert tr s (isData))
 update-trie (Func (Defn s t fb)) tr = tr
 
 check-type-type : type → (trie typeInfo) → 𝔹
-check-type-type (Type2Symb s) tr = symb-in-trie s tr
+check-type-type (Type2Symb s) tr = is-dat s tr
 check-type-type (ParType t) tr = check-type-type t tr
 check-type-type (Arrow t1 t2) tr = (check-type-type t1 tr) && (check-type-type t2 tr)
 
@@ -154,14 +160,23 @@ check-constr s1 (Constr s2 t) tr = (~ (symb-in-trie s2 tr)) && (check-constr-typ
 
 check-constrs : string → constrlist → (trie typeInfo) → 𝔹
 check-constrs s1 (EmptyCList) tr = tt
-check-constrs s1 (CList cs (Constr s2 t)) tr = (check-constr s1 (Constr s2 t) tr) && (check-constrs s1 cs (trie-insert tr s2 (isData)))
+check-constrs s1 (CList cs (Constr s2 t)) tr = (check-constr s1 (Constr s2 t) tr) && (check-constrs s1 cs (trie-insert tr s2 (isConstr s1)))
 
 check-db : string → dbody → (trie typeInfo) → 𝔹
 check-db s1 (EmptyDBody) tr = tt
-check-db s1 (NonEmptyDBody cs (Constr s2 t)) tr = (check-constr s1 (Constr s2 t) tr) && (check-constrs s1 cs (trie-insert tr s2 (isData)))
+check-db s1 (NonEmptyDBody cs (Constr s2 t)) tr = (check-constr s1 (Constr s2 t) tr) && (check-constrs s1 cs (trie-insert tr s2 (isConstr s1)))
+
+check-eqn-l : term → (trie typeInfo) → 𝔹
+check-eqn-l t tr = tt
+
+check-eqn-r : term → (trie typeInfo) → 𝔹
+check-eqn-r t tr = tt
+
+update-trie-eqn-l : term → (trie typeInfo) → (trie typeInfo)
+update-trie-eqn-l t tr = tr
 
 check-eqn : string → eqn → (trie typeInfo) → 𝔹
-check-eqn s e tr = tt
+check-eqn s (Eqn t1 t2) tr = (check-eqn-l t1 tr) && (check-eqn-r t2 (update-trie-eqn-l t1 tr))
 
 check-elist : string → eqnlist → (trie typeInfo) → 𝔹
 check-elist s (EmptyEList) tr = tt
