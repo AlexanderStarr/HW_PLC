@@ -70,6 +70,7 @@ dropParensType (ParType t) = (ParType (dropParensType t))
 dropParensType (Type2Symb s) = (Type2Symb s)
 
 dropParensConstr : constr → constr
+dropParensConstr (Constr s (ParType t)) = (Constr s (dropParensType t))
 dropParensConstr (Constr s t) = (Constr s (dropParensType t))
 
 dropParensConstrs : constrlist → constrlist
@@ -85,6 +86,9 @@ dropParensTerm (ParTerm t) = (ParTerm (dropParensTerm t))
 dropParensTerm (Term2Symb s) = (Term2Symb s)
 
 dropParensEqn : eqn → eqn
+dropParensEqn (Eqn (ParTerm t1) (ParTerm t2)) = (Eqn (dropParensTerm t1) (dropParensTerm t2)) 
+dropParensEqn (Eqn (ParTerm t1) t2) = (Eqn (dropParensTerm t1) (dropParensTerm t2))
+dropParensEqn (Eqn t1 (ParTerm t2)) = (Eqn (dropParensTerm t1) (dropParensTerm t2))
 dropParensEqn (Eqn t1 t2) = (Eqn (dropParensTerm t1) (dropParensTerm t2))
 
 dropParensEqns : eqnlist → eqnlist
