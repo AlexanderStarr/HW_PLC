@@ -31,25 +31,33 @@ data algorithm : Set where
 -- Our grammar ensures that a loc is always a number, so we want to eliminate the maybe ℕ.
 loc-to-ℕ : loc → ℕ
 loc-to-ℕ l with (string-to-ℕ l)
-loc-to-ℕ l | nothing = 0
+loc-to-ℕ l | nothing = 0  -- This should never happen, because only numbers get created as locs.
 loc-to-ℕ l | (just n) = n
 
 add-root : loc → mem → mem
 add-root l (ln , lc) = (((loc-to-ℕ l) :: ln) , lc)
 
-
-
 drop-root : loc → 𝕃 ℕ → 𝕃 ℕ
 drop-root l [] = []
 drop-root l (h :: t) = if (l =string (ℕ-to-string h)) then (drop-root l t) else (h :: (drop-root l t))
 
+assign-field : one-field → loc-or-null → cell → cell
+assign-field (FieldA) (Null) (n1 , n2 , n3) = (n1 , nothing , n3)
+assign-field (FieldB) (Null) (n1 , n2 , n3) = (n1 , n2 , nothing)
+assign-field (FieldA) (Loc l) (n1 , n2 , n3) = (n1 , (string-to-ℕ l) , n3)
+assign-field (FieldB) (Loc l) (n1 , n2 , n3) = (n1 , n2 , (string-to-ℕ l))
+
+assign-fields : loc → one-field → loc-or-null → ℕ → 𝕃 cell → 𝕃 cell
+assign-fields l of lon index [] = []
+assign-fields l of lon index (h :: t) = if (l =string (ℕ-to-string index)) then ((assign-field of lon h) :: t) else (h :: (assign-fields l of lon (suc index) t))
+
 exec-cmd : cmd → 𝕃 mem → 𝕃 mem
 exec-cmd c [] = []
 exec-cmd (AddRoot l) (m :: ms) = (add-root l m) :: ms
-exec-cmd (Assign l of lon) lm = lm
+exec-cmd (Assign l of lon) ((ln , lc) :: ms) = (ln , (assign-fields l of lon 0 lc)) :: ms
 exec-cmd (DropRoot l) ((ln , lc) :: ms) = ((drop-root l ln) , lc) :: ms
 exec-cmd (Gc) lm = lm
-exec-cmd (Snapshot) (e :: es) = e :: e :: es
+exec-cmd (Snapshot) (m :: ms) = m :: m :: ms
 
 exec-cmds : cmds → 𝕃 mem → 𝕃 mem
 exec-cmds (CmdsLast c) lm = lm
@@ -60,7 +68,7 @@ init-mem nothing = ([] , [])
 init-mem (just n) = ([] , (repeat n (nothing , nothing , nothing)))
 
 process-start : start → algorithm → 𝕃 mem
-process-start (Strt (InitHeap n) cmds) a = exec-cmds cmds ((init-mem (string-to-ℕ n)) :: [])
+process-start (Strt (InitHeap n) cmds) a = reverse (exec-cmds cmds ((init-mem (string-to-ℕ n)) :: []))
 
 process : Run → algorithm → 𝕃 mem ⊎ string
 process (_ :: _ :: ParseTree (parsed-start p) :: _ :: _ :: []) a = inj₁ (process-start p a)
