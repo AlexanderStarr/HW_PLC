@@ -2,6 +2,7 @@ module my-gclang-main where
 
 import parse
 open import lib
+open import list-merge-sort ℕ _<_
 open import gclang
 
 module parsem = parse ptr state aut
@@ -18,7 +19,7 @@ cell : Set
 cell = (maybe ℕ) × (maybe ℕ) × (maybe ℕ)
 
 mem : Set
-mem = 𝕃 ℕ × 𝕃 cell
+mem = maybe ℕ × 𝕃 ℕ × 𝕃 cell
 
 {- an algorithm is just a name for a particular memory-management
   algorithm which should be applied by process-start -}
@@ -28,6 +29,13 @@ data algorithm : Set where
   mark-and-sweep : algorithm
   copying : algorithm
 
+test-mem : mem
+test-mem = ( nothing , 3 :: 1 :: 2 :: [] , repeat 3 ( nothing , nothing , nothing ) )
+
+-------------------------------------------
+-- Code for running minimal gclang programs
+-------------------------------------------
+
 -- Our grammar ensures that a loc is always a number, so we want to eliminate the maybe ℕ.
 loc-to-ℕ : loc → ℕ
 loc-to-ℕ l with (string-to-ℕ l)
@@ -35,7 +43,7 @@ loc-to-ℕ l | nothing = 0  -- This should never happen, because only numbers ge
 loc-to-ℕ l | (just n) = n
 
 add-root : loc → mem → mem
-add-root l (ln , lc) = (((loc-to-ℕ l) :: ln) , lc)
+add-root l (ge , ln , lc) = (ge , ((loc-to-ℕ l) :: ln) , lc)
 
 drop-root : loc → 𝕃 ℕ → 𝕃 ℕ
 drop-root l [] = []
@@ -51,24 +59,64 @@ assign-fields : loc → one-field → loc-or-null → ℕ → 𝕃 cell → 𝕃
 assign-fields l of lon index [] = []
 assign-fields l of lon index (h :: t) = if (l =string (ℕ-to-string index)) then ((assign-field of lon h) :: t) else (h :: (assign-fields l of lon (suc index) t))
 
-exec-cmd : cmd → 𝕃 mem → 𝕃 mem
-exec-cmd c [] = []
-exec-cmd (AddRoot l) (m :: ms) = (add-root l m) :: ms
-exec-cmd (Assign l of lon) ((ln , lc) :: ms) = (ln , (assign-fields l of lon 0 lc)) :: ms
-exec-cmd (DropRoot l) ((ln , lc) :: ms) = ((drop-root l ln) , lc) :: ms
-exec-cmd (Gc) lm = lm
-exec-cmd (Snapshot) (m :: ms) = m :: m :: ms
+-------------------------------------
+-- Code for executing the gc commands
+-------------------------------------
 
-exec-cmds : cmds → 𝕃 mem → 𝕃 mem
-exec-cmds (CmdsLast c) lm = lm
-exec-cmds (CmdsNext c cs) lm = exec-cmds cs (exec-cmd c lm)
+get-elem : ∀ {ℓ} {A : Set ℓ} → 𝕃 A → ℕ → (maybe A)
+get-elem [] n = nothing
+get-elem (elem :: elems) 0 = just elem
+get-elem (elem :: elems) (suc n) = get-elem elems n
+
+mark-cell : (maybe ℕ) → 𝕃 cell → 𝕃 cell
+mark-cell nothing lc = []
+mark-cell (just n) [] = []
+mark-cell (just 0) ((e , a , b) :: cells) = ((just 1) , a , b) :: cells
+mark-cell (just (suc n)) (cell :: cells) = cell :: (mark-cell (just n) cells)
+
+traverse-cells : (maybe ℕ) → 𝕃 cell → ℕ → 𝕃 cell
+traverse-cells nothing lc n = lc
+traverse-cells (just root) lc 0 = lc
+traverse-cells (just root) lc (suc max) with get-elem lc root
+... | nothing = lc
+... | just (e , a , b) = traverse-cells b (traverse-cells a (mark-cell (just root) lc) max) max
+
+mark-cells : 𝕃 ℕ → 𝕃 cell → ℕ → 𝕃 cell
+mark-cells [] cells max = cells
+mark-cells (root :: roots) cells max = mark-cells roots (traverse-cells (just root) cells max) max
+
+sweep-cells : 𝕃 cell → 𝕃 cell
+sweep-cells [] = []
+sweep-cells ((nothing , a , b) :: cells) = (nothing , nothing , nothing) :: (sweep-cells cells)
+sweep-cells ((just e , a , b) :: cells) = (nothing , a , b) :: (sweep-cells cells)
+
+run-mark-and-sweep : mem → mem
+run-mark-and-sweep (ge , roots , cells) = (ge , roots , (sweep-cells (mark-cells roots cells (length cells))))
+
+run-gc : mem → algorithm → mem
+run-gc m no-mem-management = m
+run-gc m ref-counting = m
+run-gc m mark-and-sweep = run-mark-and-sweep m
+run-gc m copying = m
+
+exec-cmd : cmd → 𝕃 mem → algorithm → 𝕃 mem
+exec-cmd c [] a = []
+exec-cmd (AddRoot l) (m :: ms) a = (add-root l m) :: ms
+exec-cmd (Assign l of lon) ((ge , ln , lc) :: ms) a = (ge , ln , (assign-fields l of lon 0 lc)) :: ms
+exec-cmd (DropRoot l) ((ge , ln , lc) :: ms) a = (ge , (drop-root l ln) , lc) :: ms
+exec-cmd (Gc) (m :: ms) a = (run-gc m a) :: ms
+exec-cmd (Snapshot) (m :: ms) a = m :: m :: ms
+
+exec-cmds : cmds → 𝕃 mem → algorithm → 𝕃 mem
+exec-cmds (CmdsLast c) lm a = lm
+exec-cmds (CmdsNext c cs) lm a = exec-cmds cs (exec-cmd c lm a) a
 
 init-mem : maybe ℕ → mem
-init-mem nothing = ([] , [])
-init-mem (just n) = ([] , (repeat n (nothing , nothing , nothing)))
+init-mem nothing = (nothing , [] , [])
+init-mem (just n) = (nothing , [] , (repeat n (nothing , nothing , nothing)))
 
 process-start : start → algorithm → 𝕃 mem
-process-start (Strt (InitHeap n) cmds) a = reverse (exec-cmds cmds ((init-mem (string-to-ℕ n)) :: []))
+process-start (Strt (InitHeap n) cmds) a = reverse (exec-cmds cmds ((init-mem (string-to-ℕ n)) :: []) a)
 
 process : Run → algorithm → 𝕃 mem ⊎ string
 process (_ :: _ :: ParseTree (parsed-start p) :: _ :: _ :: []) a = inj₁ (process-start p a)
@@ -82,7 +130,8 @@ cell-to-string : cell → string
 cell-to-string (extra , fa , fb) = field-to-string extra ^ " : " ^ field-to-string fa ^ " . " ^ field-to-string fb ^ "\n"
 
 mem-to-string : mem → string
-mem-to-string (roots , cells) = "roots: " ^ 𝕃-to-string ℕ-to-string " " roots ^ "\n" ^ string-concat (map cell-to-string cells)
+mem-to-string (global-extra , roots , cells) = "global extra: " ^ (field-to-string global-extra) 
+        ^ "\nroots: " ^ 𝕃-to-string ℕ-to-string " " (merge-sort roots) ^ "\n" ^ string-concat (map cell-to-string cells)
 
 mem-to-graphviz : mem → string
 mem-to-graphviz h = "not implemented yet"
@@ -120,5 +169,5 @@ processArgs showRun showParsed a (x :: xs) = putStr ("Unknown option " ^ x ^ "\n
 processArgs showRun showParsed a [] = putStr "Please run with the name of a file to process.\n"
 
 main : IO ⊤
-main = getArgs >>= processArgs ff ff ref-counting
+main = getArgs >>= processArgs ff ff no-mem-management
 
