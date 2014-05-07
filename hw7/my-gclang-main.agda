@@ -32,9 +32,9 @@ data algorithm : Set where
 test-mem : mem
 test-mem = ( nothing , 3 :: 1 :: 2 :: [] , repeat 3 ( nothing , nothing , nothing ) )
 
--------------------------------------------
--- Code for running minimal gclang programs
--------------------------------------------
+--------------------
+-- General functions
+--------------------
 
 -- Our grammar ensures that a loc is always a number, so we want to eliminate the maybe ℕ.
 loc-to-ℕ : loc → ℕ
@@ -42,8 +42,55 @@ loc-to-ℕ l with (string-to-ℕ l)
 loc-to-ℕ l | nothing = 0  -- This should never happen, because only numbers get created as locs.
 loc-to-ℕ l | (just n) = n
 
-add-root : loc → mem → mem
-add-root l (ge , ln , lc) = (ge , ((loc-to-ℕ l) :: ln) , lc)
+get-elem : ∀ {ℓ} {A : Set ℓ} → 𝕃 A → ℕ → (maybe A)
+get-elem [] n = nothing
+get-elem (elem :: elems) 0 = just elem
+get-elem (elem :: elems) (suc n) = get-elem elems n
+
+change-elem : ∀ {ℓ} {A : Set ℓ} → 𝕃 A → ℕ → A → 𝕃 A
+change-elem [] n a = []
+change-elem (elem :: elems) 0 a = a :: elems
+change-elem (elem :: elems) (suc n) a = elem :: (change-elem elems n a)
+
+----------------------------
+-- Code for the ref-counting
+----------------------------
+
+increment-refcount : ℕ → 𝕃 cell → 𝕃 cell
+increment-refcount n [] = []
+increment-refcount 0 (((nothing) , a , b) :: cells) = ((just 1) , a , b) :: cells
+increment-refcount 0 (((just ref) , a , b) :: cells) = ((just (suc ref)) , a , b) :: cells
+increment-refcount (suc n) (c :: cells) = c :: (increment-refcount n cells)
+
+ir-wrap : loc-or-null → 𝕃 cell → 𝕃 cell
+ir-wrap Null cells = cells
+ir-wrap (Loc l) cells = increment-refcount (loc-to-ℕ l) cells
+
+decrement-refcount : (maybe ℕ) → ‌𝕃 cell → ℕ → 𝕃 cell
+decrement-refcount _ cells 0 = cells
+decrement-refcount nothing cells (suc count) = cells
+decrement-refcount (just index) cells (suc count) with get-elem cells index
+... | nothing = cells
+... | (just (nothing , a , b)) = (change-elem cells index (nothing , nothing , nothing))
+... | (just ((just 0) , a , b)) = (change-elem cells index (nothing , nothing , nothing))
+... | (just ((just 1) , a , b)) = change-elem (decrement-refcount b (decrement-refcount a cells count) count) index (nothing , nothing , nothing)
+... | (just ((just (suc n)) , a , b)) = change-elem cells index ((just n) , a , b)
+
+assign-field-refcount : loc → one-field → loc-or-null → 𝕃 cell → 𝕃 cell
+assign-field-refcount l (FieldA) lon cells with get-elem cells (loc-to-ℕ l)
+... | nothing = cells
+... | (just (e , a , b)) = ir-wrap lon (decrement-refcount a cells (length cells))
+assign-field-refcount l (FieldB) lon cells with get-elem cells (loc-to-ℕ l)
+... | nothing = cells
+... | (just (e , a , b)) = ir-wrap lon (decrement-refcount b cells (length cells))
+
+-------------------------------------------
+-- Code for running minimal gclang programs
+-------------------------------------------
+
+add-root : loc → mem → algorithm → mem
+add-root l (ge , ln , lc) (ref-counting) = (ge , ((loc-to-ℕ l) :: ln) , (increment-refcount (loc-to-ℕ l) lc))
+add-root l (ge , ln , lc) a = (ge , ((loc-to-ℕ l) :: ln) , lc)
 
 drop-root : loc → 𝕃 ℕ → 𝕃 ℕ
 drop-root l [] = []
@@ -55,21 +102,16 @@ assign-field (FieldB) (Null) (n1 , n2 , n3) = (n1 , n2 , nothing)
 assign-field (FieldA) (Loc l) (n1 , n2 , n3) = (n1 , (string-to-ℕ l) , n3)
 assign-field (FieldB) (Loc l) (n1 , n2 , n3) = (n1 , n2 , (string-to-ℕ l))
 
-assign-fields : loc → one-field → loc-or-null → ℕ → 𝕃 cell → 𝕃 cell
-assign-fields l of lon index [] = []
-assign-fields l of lon index (h :: t) = if (l =string (ℕ-to-string index)) then ((assign-field of lon h) :: t) else (h :: (assign-fields l of lon (suc index) t))
+assign-fields : loc → one-field → loc-or-null → ℕ → 𝕃 cell → algorithm → 𝕃 cell
+assign-fields l of lon index [] a = []
+assign-fields l of lon index (h :: t) a = if (l =string (ℕ-to-string index)) then ((assign-field of lon h) :: t) else (h :: (assign-fields l of lon (suc index) t a))
 
 -------------------------------------
 -- Code for executing the gc commands
 -------------------------------------
 
-get-elem : ∀ {ℓ} {A : Set ℓ} → 𝕃 A → ℕ → (maybe A)
-get-elem [] n = nothing
-get-elem (elem :: elems) 0 = just elem
-get-elem (elem :: elems) (suc n) = get-elem elems n
-
 mark-cell : (maybe ℕ) → 𝕃 cell → 𝕃 cell
-mark-cell nothing lc = []
+mark-cell nothing lc = lc
 mark-cell (just n) [] = []
 mark-cell (just 0) ((e , a , b) :: cells) = ((just 1) , a , b) :: cells
 mark-cell (just (suc n)) (cell :: cells) = cell :: (mark-cell (just n) cells)
@@ -101,8 +143,10 @@ run-gc m copying = m
 
 exec-cmd : cmd → 𝕃 mem → algorithm → 𝕃 mem
 exec-cmd c [] a = []
-exec-cmd (AddRoot l) (m :: ms) a = (add-root l m) :: ms
-exec-cmd (Assign l of lon) ((ge , ln , lc) :: ms) a = (ge , ln , (assign-fields l of lon 0 lc)) :: ms
+exec-cmd (AddRoot l) (m :: ms) a = (add-root l m a) :: ms
+exec-cmd (Assign l of lon) ((ge , ln , lc) :: ms) ref-counting = (ge , ln , (assign-fields l of lon 0 (assign-field-refcount l of lon lc) no-mem-management)) :: ms
+exec-cmd (Assign l of lon) ((ge , ln , lc) :: ms) a = (ge , ln , (assign-fields l of lon 0 lc a)) :: ms
+exec-cmd (DropRoot l) ((ge , ln , lc) :: ms) ref-counting = (ge , (drop-root l ln) , (decrement-refcount (string-to-ℕ l) lc (length lc))) :: ms
 exec-cmd (DropRoot l) ((ge , ln , lc) :: ms) a = (ge , (drop-root l ln) , lc) :: ms
 exec-cmd (Gc) (m :: ms) a = (run-gc m a) :: ms
 exec-cmd (Snapshot) (m :: ms) a = m :: m :: ms
@@ -111,12 +155,12 @@ exec-cmds : cmds → 𝕃 mem → algorithm → 𝕃 mem
 exec-cmds (CmdsLast c) lm a = lm
 exec-cmds (CmdsNext c cs) lm a = exec-cmds cs (exec-cmd c lm a) a
 
-init-mem : maybe ℕ → mem
-init-mem nothing = (nothing , [] , [])
-init-mem (just n) = (nothing , [] , (repeat n (nothing , nothing , nothing)))
+init-mem : maybe ℕ → algorithm → mem
+init-mem nothing a = (nothing , [] , [])
+init-mem (just n) a = (nothing , [] , (repeat n (nothing , nothing , nothing)))
 
 process-start : start → algorithm → 𝕃 mem
-process-start (Strt (InitHeap n) cmds) a = reverse (exec-cmds cmds ((init-mem (string-to-ℕ n)) :: []) a)
+process-start (Strt (InitHeap n) cmds) a = reverse (exec-cmds cmds ((init-mem (string-to-ℕ n) a) :: []) a)
 
 process : Run → algorithm → 𝕃 mem ⊎ string
 process (_ :: _ :: ParseTree (parsed-start p) :: _ :: _ :: []) a = inj₁ (process-start p a)
