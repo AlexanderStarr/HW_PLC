@@ -47,6 +47,12 @@ get-elem [] n = nothing
 get-elem (elem :: elems) 0 = just elem
 get-elem (elem :: elems) (suc n) = get-elem elems n
 
+get-elems-extra : 𝕃 cell → (maybe ℕ) → (maybe ℕ)
+get-elems-extra cells nothing = nothing
+get-elems-extra cells (just n) with (get-elem cells n)
+... | nothing = nothing
+... | (just (e , a , b)) = e
+
 change-elem : ∀ {ℓ} {A : Set ℓ} → 𝕃 A → ℕ → A → 𝕃 A
 change-elem [] n a = []
 change-elem (elem :: elems) 0 a = a :: elems
@@ -55,6 +61,12 @@ change-elem (elem :: elems) (suc n) a = elem :: (change-elem elems n a)
 ge-to-ℕ : (maybe ℕ) → ℕ
 ge-to-ℕ nothing = 0
 ge-to-ℕ (just n) = n
+
+2!=0 : ℕ → (2 =ℕ 0 ≡ ff)
+2!=0 n = refl
+
+get-half : ℕ → ℕ
+get-half n = (n ÷ 2 div (2!=0 2))
 
 ----------------------------
 -- Code for the ref-counting
@@ -141,8 +153,56 @@ sweep-cells ((just e , a , b) :: cells) = (nothing , a , b) :: (sweep-cells cell
 run-mark-and-sweep : mem → mem
 run-mark-and-sweep (ge , roots , cells) = (ge , roots , (sweep-cells (mark-cells roots cells (length cells))))
 
+resolve-ptr : cell → 𝕃 cell → cell
+resolve-ptr (e , a , b) cells = (e , (get-elems-extra cells a) , (get-elems-extra cells b))
+
+resolve-ptrs : 𝕃 cell → 𝕃 cell → ℕ → ℕ → 𝕃 cell
+resolve-ptrs ref-cells [] count end = []
+resolve-ptrs ref-cells (cell :: cells) count end with (count =ℕ end)
+... | tt = cells
+... | ff = (resolve-ptr cell ref-cells) :: (resolve-ptrs ref-cells cells count end)
+
+translate-roots : ℕ → ℕ → 𝕃 ℕ → 𝕃 ℕ
+translate-roots old-ge new-ge [] = []
+translate-roots old-ge new-ge (root :: roots) with (old-ge < new-ge)
+... | tt = (root + new-ge) :: (translate-roots old-ge new-ge roots)
+... | ff = (root ∸ new-ge) :: (translate-roots old-ge new-ge roots)
+
+advance-copy-to : ℕ → 𝕃 cell → ℕ → ℕ
+advance-copy-to index cells 0 = index
+advance-copy-to index cells (suc n) with (get-elem cells index)
+... | nothing = index
+... | (just (nothing , a , b)) = index
+... | (just ((just num) , a , b)) = (advance-copy-to (suc index) cells n)
+
+copy-cell : (maybe ℕ) → ℕ → 𝕃 cell → ℕ → 𝕃 cell
+copy-cell nothing copy-to cells counter = cells
+copy-cell (just curr) copy-to cells 0 = cells
+copy-cell (just curr) copy-to cells (suc counter) with (get-elem cells curr)
+... | nothing = cells
+... | (just ((just n) , a , b)) = cells
+... | (just (nothing , a , b)) with (change-elem (change-elem cells copy-to (nothing , a , b)) curr ((just copy-to) , a , b))
+...     | updated-cells-1 with (copy-cell a (suc copy-to) updated-cells-1 counter)
+...         | updated-cells-2 = (copy-cell b (advance-copy-to (suc copy-to) updated-cells-2 (length cells)) updated-cells-2 counter)
+
+copy-cells : ℕ → 𝕃 ℕ → 𝕃 cell → ℕ → 𝕃 cell
+copy-cells ge [] cells copy-to = cells
+copy-cells ge (root :: roots) cells copy-to = copy-cells ge roots (copy-cell (just root) copy-to cells (length cells)) (advance-copy-to copy-to cells (length cells))
+
+clear-cells : ℕ → ℕ → ℕ → 𝕃 cell → 𝕃 cell
+clear-cells index start end [] = []
+clear-cells index start end (cell :: cells) with (start ≤ index) && (index < end)
+... | tt = (nothing , nothing , nothing) :: (clear-cells (suc index) start end cells)
+... | ff = cell :: (clear-cells (suc index) start end cells)
+
+new-ge : ℕ → ℕ → ℕ
+new-ge old-ge list-len = if (old-ge =ℕ (get-half list-len)) then (0) else (get-half list-len)
+
 run-copy-collect : mem → mem
-run-copy-collect m = m
+run-copy-collect (ge , [] , cells) = ((just (new-ge (ge-to-ℕ ge) (length cells))) , [] , (repeat (length cells) (nothing , nothing , nothing)))
+run-copy-collect (ge , roots , cells) with (copy-cells (ge-to-ℕ ge) roots cells (new-ge (ge-to-ℕ ge) (length cells)))
+... | new-cells-1 with (resolve-ptrs new-cells-1 new-cells-1 (new-ge (ge-to-ℕ ge) (length cells)) ((new-ge (ge-to-ℕ ge) (length cells)) + (get-half (length cells))))
+...     | new-cells-2 = ((just (new-ge (ge-to-ℕ ge) (length cells))) , (translate-roots (ge-to-ℕ ge) (new-ge (ge-to-ℕ ge) (length cells)) roots) , (clear-cells 0 (ge-to-ℕ ge) ((ge-to-ℕ ge) + (get-half (length cells))) new-cells-2))
 
 run-gc : mem → algorithm → mem
 run-gc m no-mem-management = m
@@ -153,12 +213,6 @@ run-gc m copying = run-copy-collect m
 --------------------------
 -- Code for executing cmds
 --------------------------
-
-2!=0 : ℕ → (2 =ℕ 0 ≡ ff)
-2!=0 n = refl
-
-get-half : ℕ → ℕ
-get-half n = (n ÷ 2 div (2!=0 2))
 
 -- Filters out assign commands for a field which is outside the virtual heap.  For use with --copying.
 -- i.e. prevents changing anything in the other half of the heap from being changed.
@@ -205,8 +259,14 @@ mem-to-string : mem → string
 mem-to-string (global-extra , roots , cells) = "global extra: " ^ (field-to-string global-extra) 
         ^ "\nroots: " ^ 𝕃-to-string ℕ-to-string " " (merge-sort roots) ^ "\n" ^ string-concat (map cell-to-string cells)
 
+gen-nodes : mem → string
+gen-nodes m = "s0 [label = \"s0\"];\ns1 [label = \"s1\"];\n"
+
+gen-edges : mem → string
+gen-edges m = "s0 -> s1;\n"
+
 mem-to-graphviz : mem → string
-mem-to-graphviz h = "not implemented yet"
+mem-to-graphviz h = "digraph mem {\nrankdir = LR;\nnode [shape = circle];\n" ^ (gen-nodes h) ^ (gen-edges h) ^ "}"
 
 dumpMems-h : ℕ → 𝕃 mem → IO ⊤
 dumpMems-h n [] = return triv
