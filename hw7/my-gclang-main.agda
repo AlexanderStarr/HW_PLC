@@ -42,29 +42,35 @@ loc-to-ℕ l with (string-to-ℕ l)
 loc-to-ℕ l | nothing = 0  -- This should never happen, because only numbers get created as locs.
 loc-to-ℕ l | (just n) = n
 
+-- Super handy function to get an element at a certain index.
 get-elem : ∀ {ℓ} {A : Set ℓ} → 𝕃 A → ℕ → (maybe A)
 get-elem [] n = nothing
 get-elem (elem :: elems) 0 = just elem
 get-elem (elem :: elems) (suc n) = get-elem elems n
 
+-- Returns the extra field of a cell at a given field.
 get-elems-extra : 𝕃 cell → (maybe ℕ) → (maybe ℕ)
 get-elems-extra cells nothing = nothing
 get-elems-extra cells (just n) with (get-elem cells n)
 ... | nothing = nothing
 ... | (just (e , a , b)) = e
 
+-- Another super handy function which replaces the element at a given index with a supplied element.
 change-elem : ∀ {ℓ} {A : Set ℓ} → 𝕃 A → ℕ → A → 𝕃 A
 change-elem [] n a = []
 change-elem (elem :: elems) 0 a = a :: elems
 change-elem (elem :: elems) (suc n) a = elem :: (change-elem elems n a)
 
+-- Converts a global extra to a nat.
 ge-to-ℕ : (maybe ℕ) → ℕ
 ge-to-ℕ nothing = 0
 ge-to-ℕ (just n) = n
 
+-- Proof for the get-half function.
 2!=0 : ℕ → (2 =ℕ 0 ≡ ff)
 2!=0 n = refl
 
+-- Returns the result of having a nat.
 get-half : ℕ → ℕ
 get-half n = (n ÷ 2 div (2!=0 2))
 
@@ -118,15 +124,22 @@ assign-field (FieldB) (Null) (n1 , n2 , n3) = (n1 , n2 , nothing)
 assign-field (FieldA) (Loc l) (n1 , n2 , n3) = (n1 , (string-to-ℕ l) , n3)
 assign-field (FieldB) (Loc l) (n1 , n2 , n3) = (n1 , n2 , (string-to-ℕ l))
 
+create-loc : loc-or-null → (maybe ℕ) → loc-or-null
+create-loc Null ge = Null
+create-loc (Loc l) nothing = (Loc l)
+create-loc (Loc l) (just n) = (Loc (ℕ-to-string (n + (loc-to-ℕ l))))
+
 -- This takes a location, the field to modify, the location to set it to, a counter, the
 -- list of cells, and the global extra field.
 assign-fields : loc → one-field → loc-or-null → ℕ → 𝕃 cell → (maybe ℕ) → 𝕃 cell
 assign-fields l of lon index [] ge = []
-assign-fields l of lon index (h :: t) ge = if (((loc-to-ℕ l) + (ge-to-ℕ ge)) =ℕ index) then ((assign-field of lon h) :: t) else (h :: (assign-fields l of lon (suc index) t ge))
+assign-fields l of lon index (h :: t) ge = if (((loc-to-ℕ l) + (ge-to-ℕ ge)) =ℕ index) then ((assign-field of (create-loc lon ge) h) :: t) else (h :: (assign-fields l of lon (suc index) t ge))
 
 -------------------------------------
 -- Code for executing the gc commands
 -------------------------------------
+
+-- From here to next header is for mark-and-sweep
 
 mark-cell : (maybe ℕ) → 𝕃 cell → 𝕃 cell
 mark-cell nothing lc = lc
@@ -153,6 +166,8 @@ sweep-cells ((just e , a , b) :: cells) = (nothing , a , b) :: (sweep-cells cell
 run-mark-and-sweep : mem → mem
 run-mark-and-sweep (ge , roots , cells) = (ge , roots , (sweep-cells (mark-cells roots cells (length cells))))
 
+-- From here to the next header is for copy collection
+
 resolve-ptr : cell → 𝕃 cell → cell
 resolve-ptr (e , a , b) cells = (e , (get-elems-extra cells a) , (get-elems-extra cells b))
 
@@ -162,11 +177,11 @@ resolve-ptrs ref-cells (cell :: cells) count end with (count =ℕ end)
 ... | tt = cells
 ... | ff = (resolve-ptr cell ref-cells) :: (resolve-ptrs ref-cells cells count end)
 
-translate-roots : ℕ → ℕ → 𝕃 ℕ → 𝕃 ℕ
-translate-roots old-ge new-ge [] = []
-translate-roots old-ge new-ge (root :: roots) with (old-ge < new-ge)
-... | tt = (root + new-ge) :: (translate-roots old-ge new-ge roots)
-... | ff = (root ∸ new-ge) :: (translate-roots old-ge new-ge roots)
+translate-roots : 𝕃 ℕ → 𝕃 cell → 𝕃 ℕ
+translate-roots [] cells = []
+translate-roots (root :: roots) cells with (get-elems-extra cells (just root))
+... | nothing = 0 :: (translate-roots roots cells)
+... | (just n) = n :: (translate-roots roots cells)
 
 advance-copy-to : ℕ → 𝕃 cell → ℕ → ℕ
 advance-copy-to index cells 0 = index
@@ -198,11 +213,17 @@ clear-cells index start end (cell :: cells) with (start ≤ index) && (index < e
 new-ge : ℕ → ℕ → ℕ
 new-ge old-ge list-len = if (old-ge =ℕ (get-half list-len)) then (0) else (get-half list-len)
 
+-- This monstrosity handles all the steps required for copy collection.
+-- Essentially, for every root, you follow the graph starting at that root, 
+-- and copy everything to the to-space and assign forwarding pointers.
+-- Then it does another sweep to fix all the pointers in the to-space (they still point to the from-space).
+-- Then, it goes through and fixes all the roots
+-- Finally, it clears all of the data in the from-space.
 run-copy-collect : mem → mem
 run-copy-collect (ge , [] , cells) = ((just (new-ge (ge-to-ℕ ge) (length cells))) , [] , (repeat (length cells) (nothing , nothing , nothing)))
 run-copy-collect (ge , roots , cells) with (copy-cells (ge-to-ℕ ge) roots cells (new-ge (ge-to-ℕ ge) (length cells)))
 ... | new-cells-1 with (resolve-ptrs new-cells-1 new-cells-1 (new-ge (ge-to-ℕ ge) (length cells)) ((new-ge (ge-to-ℕ ge) (length cells)) + (get-half (length cells))))
-...     | new-cells-2 = ((just (new-ge (ge-to-ℕ ge) (length cells))) , (translate-roots (ge-to-ℕ ge) (new-ge (ge-to-ℕ ge) (length cells)) roots) , (clear-cells 0 (ge-to-ℕ ge) ((ge-to-ℕ ge) + (get-half (length cells))) new-cells-2))
+...     | new-cells-2 = ((just (new-ge (ge-to-ℕ ge) (length cells))) , (translate-roots roots new-cells-2) , (clear-cells 0 (ge-to-ℕ ge) ((ge-to-ℕ ge) + (get-half (length cells))) new-cells-2))
 
 run-gc : mem → algorithm → mem
 run-gc m no-mem-management = m
