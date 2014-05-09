@@ -52,6 +52,10 @@ change-elem [] n a = []
 change-elem (elem :: elems) 0 a = a :: elems
 change-elem (elem :: elems) (suc n) a = elem :: (change-elem elems n a)
 
+ge-to-ℕ : (maybe ℕ) → ℕ
+ge-to-ℕ nothing = 0
+ge-to-ℕ (just n) = n
+
 ----------------------------
 -- Code for the ref-counting
 ----------------------------
@@ -102,9 +106,11 @@ assign-field (FieldB) (Null) (n1 , n2 , n3) = (n1 , n2 , nothing)
 assign-field (FieldA) (Loc l) (n1 , n2 , n3) = (n1 , (string-to-ℕ l) , n3)
 assign-field (FieldB) (Loc l) (n1 , n2 , n3) = (n1 , n2 , (string-to-ℕ l))
 
-assign-fields : loc → one-field → loc-or-null → ℕ → 𝕃 cell → algorithm → 𝕃 cell
-assign-fields l of lon index [] a = []
-assign-fields l of lon index (h :: t) a = if (l =string (ℕ-to-string index)) then ((assign-field of lon h) :: t) else (h :: (assign-fields l of lon (suc index) t a))
+-- This takes a location, the field to modify, the location to set it to, a counter, the
+-- list of cells, and the global extra field.
+assign-fields : loc → one-field → loc-or-null → ℕ → 𝕃 cell → (maybe ℕ) → 𝕃 cell
+assign-fields l of lon index [] ge = []
+assign-fields l of lon index (h :: t) ge = if (((loc-to-ℕ l) + (ge-to-ℕ ge)) =ℕ index) then ((assign-field of lon h) :: t) else (h :: (assign-fields l of lon (suc index) t ge))
 
 -------------------------------------
 -- Code for executing the gc commands
@@ -135,17 +141,38 @@ sweep-cells ((just e , a , b) :: cells) = (nothing , a , b) :: (sweep-cells cell
 run-mark-and-sweep : mem → mem
 run-mark-and-sweep (ge , roots , cells) = (ge , roots , (sweep-cells (mark-cells roots cells (length cells))))
 
+run-copy-collect : mem → mem
+run-copy-collect m = m
+
 run-gc : mem → algorithm → mem
 run-gc m no-mem-management = m
 run-gc m ref-counting = m
 run-gc m mark-and-sweep = run-mark-and-sweep m
-run-gc m copying = m
+run-gc m copying = run-copy-collect m
+
+--------------------------
+-- Code for executing cmds
+--------------------------
+
+2!=0 : ℕ → (2 =ℕ 0 ≡ ff)
+2!=0 n = refl
+
+get-half : ℕ → ℕ
+get-half n = (n ÷ 2 div (2!=0 2))
+
+-- Filters out assign commands for a field which is outside the virtual heap.  For use with --copying.
+-- i.e. prevents changing anything in the other half of the heap from being changed.
+assign-fields-copying : loc → one-field → loc-or-null → 𝕃 cell → (maybe ℕ) → 𝕃 cell
+assign-fields-copying l of lon lc ge with ((loc-to-ℕ l) < (get-half (length lc)))
+... | ff = lc
+... | tt = assign-fields l of lon 0 lc ge
 
 exec-cmd : cmd → 𝕃 mem → algorithm → 𝕃 mem
 exec-cmd c [] a = []
 exec-cmd (AddRoot l) (m :: ms) a = (add-root l m a) :: ms
-exec-cmd (Assign l of lon) ((ge , ln , lc) :: ms) ref-counting = (ge , ln , (assign-fields l of lon 0 (assign-field-refcount l of lon lc) no-mem-management)) :: ms
-exec-cmd (Assign l of lon) ((ge , ln , lc) :: ms) a = (ge , ln , (assign-fields l of lon 0 lc a)) :: ms
+exec-cmd (Assign l of lon) ((ge , ln , lc) :: ms) ref-counting = (ge , ln , (assign-fields l of lon 0 (assign-field-refcount l of lon lc) ge)) :: ms
+exec-cmd (Assign l of lon) ((ge , ln , lc) :: ms) copying = (ge , ln , (assign-fields-copying l of lon  lc ge)) :: ms
+exec-cmd (Assign l of lon) ((ge , ln , lc) :: ms) a = (ge , ln , (assign-fields l of lon 0 lc ge)) :: ms
 exec-cmd (DropRoot l) ((ge , ln , lc) :: ms) ref-counting = (ge , (drop-root l ln) , (decrement-refcount (string-to-ℕ l) lc (length lc))) :: ms
 exec-cmd (DropRoot l) ((ge , ln , lc) :: ms) a = (ge , (drop-root l ln) , lc) :: ms
 exec-cmd (Gc) (m :: ms) a = (run-gc m a) :: ms
@@ -157,6 +184,7 @@ exec-cmds (CmdsNext c cs) lm a = exec-cmds cs (exec-cmd c lm a) a
 
 init-mem : maybe ℕ → algorithm → mem
 init-mem nothing a = (nothing , [] , [])
+init-mem (just n) (copying) = ((just 0) , [] , (repeat (n + n) (nothing , nothing , nothing)))
 init-mem (just n) a = (nothing , [] , (repeat n (nothing , nothing , nothing)))
 
 process-start : start → algorithm → 𝕃 mem
