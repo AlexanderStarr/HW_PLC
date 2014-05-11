@@ -1,0 +1,43 @@
+Found alstarr/hw7 directory.
+agda.sh --no-termination-check --verbose=0 -i alstarr/hw7 -c alstarr/hw7/my-gclang-main.agda >> alstarr/hw7/output-1.txt 2>&1
+------------------------------
+Running no gc on test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog1.gclang
+alstarr/hw7/my-gclang-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog1.gclang
+15 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog1.gclang
+------------------------------
+Running no gc on test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog2.gclang
+alstarr/hw7/my-gclang-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog2.gclang
+20 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog2.gclang
+------------------------------
+Running no gc on test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog3.gclang
+alstarr/hw7/my-gclang-main /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog3.gclang
+15 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog3.gclang
+------------------------------
+Running mark and sweep on test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog1a.gclang
+alstarr/hw7/my-gclang-main --mark-and-sweep /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog1a.gclang
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog1a.gclang
+------------------------------
+Running mark and sweep on test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog2a.gclang
+alstarr/hw7/my-gclang-main --mark-and-sweep /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog2a.gclang
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog2a.gclang
+------------------------------
+Running mark and sweep on test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog3a.gclang
+alstarr/hw7/my-gclang-main --mark-and-sweep /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog3a.gclang
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog3a.gclang
+------------------------------
+Running ref-counting on test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog1a.gclang
+alstarr/hw7/my-gclang-main --ref-counting /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog1a.gclang
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog1a.gclang
+------------------------------
+Running ref-counting on test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog2a.gclang
+alstarr/hw7/my-gclang-main --ref-counting /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog2a.gclang
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog2a.gclang
+------------------------------
+Running ref-counting on test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog3b.gclang
+alstarr/hw7/my-gclang-main --ref-counting /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog3b.gclang
+10 points for test /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog3b.gclang
+log alstarr/hw7/my-gclang-main --copying /Users/Bourbaki/teaching-stuffs/111-spring14-priv/grading/hw7/prog3c.gclang
+------------------------------
+Testing completed.
+Final score is:
+110+30=140
