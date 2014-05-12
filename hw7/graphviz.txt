@@ -1,0 +1,4 @@
+Notes:
+- Graphviz files will be dumped out for each snapshot.  They will be titled "memX.gv", where X is the number of the snapshot.
+- Compile these files to PDF format by using the following command: "dot -Tpdf -o memX.pdf memX.txt".
+- Roots are hidden nodes, and cells can take on a somewhat strange orientation.

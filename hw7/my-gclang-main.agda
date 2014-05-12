@@ -280,14 +280,26 @@ mem-to-string : mem → string
 mem-to-string (global-extra , roots , cells) = "global extra: " ^ (field-to-string global-extra) 
         ^ "\nroots: " ^ 𝕃-to-string ℕ-to-string " " (merge-sort roots) ^ "\n" ^ string-concat (map cell-to-string cells)
 
-gen-nodes : mem → string
-gen-nodes m = "s0 [label = \"s0\"];\ns1 [label = \"s1\"];\n"
+gen-nodes : 𝕃 cell → ℕ → string
+gen-nodes [] n = ""
+gen-nodes (cell :: cells) n = "s" ^ (ℕ-to-string n) ^ " [label = \"" ^ (ℕ-to-string n) ^ "\"];\n" ^ (gen-nodes cells (suc n))
 
-gen-edges : mem → string
-gen-edges m = "s0 -> s1;\n"
+gen-roots : 𝕃 ℕ → string
+gen-roots [] = ""
+gen-roots (root :: roots) = "hidden -> s" ^ (ℕ-to-string root) ^ ";\n" ^ (gen-roots roots)
+
+gen-edge : cell → ℕ → string
+gen-edge (extra , nothing , nothing) n = ""
+gen-edge (extra , (just a) , nothing) n = "s" ^ (ℕ-to-string n) ^ " -> s" ^ (ℕ-to-string a) ^ "[label = \"a\"];\n"
+gen-edge (extra , nothing , (just b)) n = "s" ^ (ℕ-to-string n) ^ " -> s" ^ (ℕ-to-string b) ^ "[label = \"b\"];\n"
+gen-edge (extra , (just a) , (just b)) n = "s" ^ (ℕ-to-string n) ^ " -> s" ^ (ℕ-to-string a) ^ "[label = \"a\"];\n" ^ "s" ^ (ℕ-to-string n) ^ " -> s" ^ (ℕ-to-string b) ^ "[label = \"b\"];\n"
+
+gen-edges : 𝕃 cell → ℕ → string
+gen-edges [] n = ""
+gen-edges (cell :: cells) n = (gen-edge cell n) ^ (gen-edges cells (suc n))
 
 mem-to-graphviz : mem → string
-mem-to-graphviz h = "digraph mem {\nrankdir = LR;\nnode [shape = circle];\n" ^ (gen-nodes h) ^ (gen-edges h) ^ "}"
+mem-to-graphviz (global-extra , roots , cells) = "digraph mem {\nrankdir = LR;\nhidden [shape = plaintext, label = \"\"];\nnode [shape = circle];\n" ^ (gen-nodes cells 0) ^ (gen-roots roots) ^ (gen-edges cells 0) ^ "}"
 
 dumpMems-h : ℕ → 𝕃 mem → IO ⊤
 dumpMems-h n [] = return triv
