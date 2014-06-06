@@ -1,0 +1,4 @@
+data nat where
+  zero : nat
+  suc : nat -> 
+% missing the return type for suc

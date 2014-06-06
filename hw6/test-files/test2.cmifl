@@ -1,0 +1,16 @@
+data nat where
+  zero : nat
+  suc : nat -> nat
+
+data mybool where
+   ttt : mybool
+   fff : mybool
+
+fun mycompare : nat -> nat -> mybool
+mycompare zero zero = ttt .
+mycompare (suc n) (suc m) = mycompare n m .
+mycompare zero (suc m) = fff . 
+mycompare (suc m) zero = fff . 
+
+fun main : mybool
+main = mycompare (suc zero) (suc (suc zero)) . 

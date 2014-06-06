@@ -1,0 +1,26 @@
+heapsize 5
+
+addroot 0
+
+0.a = 0
+0.b = 1
+
+1.a = 1
+1.b = 2
+
+2.a = 2
+2.b = 0
+
+snapshot
+
+addroot 3
+
+3.a = 3
+3.b = 4
+
+4.a = 4
+4.b = 3
+
+droproot 3
+
+snapshot

@@ -1,0 +1,2 @@
+% empty datatypes are allowed
+data empty where

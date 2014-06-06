@@ -1,0 +1,1 @@
+(ab (bac abac (ba a ab)) (bb (aab baa)))

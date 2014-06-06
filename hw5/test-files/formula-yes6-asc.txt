@@ -1,0 +1,1 @@
+(forall a.a()->forall b.b(c,c))->b(c,c)

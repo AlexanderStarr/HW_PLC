@@ -1,0 +1,9 @@
+data nat where
+  zero : nat
+  suc : nat -> nat
+
+% the type of the argument to suc does not have the right type in the second equation
+fun add : nat -> nat -> nat
+add zero y = y .
+add (suc x) y = suc (add x) .
+

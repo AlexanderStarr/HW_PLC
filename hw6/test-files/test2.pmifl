@@ -1,0 +1,8 @@
+fun main : list
+main = append testlista testlistb .
+
+fun testlista : list
+testlista = cons one (cons one nil) .
+
+fun testlistb : list
+testlistb = cons zero (cons zero nil) .

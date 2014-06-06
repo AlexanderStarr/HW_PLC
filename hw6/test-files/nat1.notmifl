@@ -1,0 +1,9 @@
+data nat where
+  zero : nat
+  suc : nat -> nat
+
+% missing the fun keyword
+add : nat -> nat -> nat
+add zero y = y .
+add (suc x) y = suc (add x y) .
+

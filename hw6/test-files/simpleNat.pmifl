@@ -1,0 +1,6 @@
+fun main : nat
+main = (suc zero) .
+
+data nat where
+  zero : nat
+  suc : nat -> nat

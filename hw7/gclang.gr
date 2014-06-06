@@ -1,0 +1,35 @@
+gclang
+
+Start 
+
+start
+
+Syntactic
+
+Strt : start -> ows init-heap ws cmds ows.
+
+InitHeap : init-heap -> 'heapsize' ows num .
+
+CmdsLast : cmds -> cmd .
+CmdsNext : cmds -> cmd ws cmds .
+
+Assign : cmd -> loc one-field ows '=' ows loc-or-null .
+AddRoot : cmd -> 'addroot' ows loc .
+DropRoot : cmd -> 'droproot' ows loc .
+Snapshot : cmd -> 'snapshot' .
+Gc : cmd -> 'gc' .
+
+FieldA : one-field -> '.a' .
+FieldB : one-field -> '.b' .
+
+Loc : loc-or-null -> loc.
+Null : loc-or-null -> 'null'.
+
+Lexical
+
+loc -> num.
+
+num -> '0' | ['1'-'9']['0'-'9']* .
+
+ws => (space | '\t' | '\n')+.
+ows => ws? .

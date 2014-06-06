@@ -1,0 +1,6 @@
+data nat where
+  zero : nat
+  suc : nat -> nat
+
+fun main : nat
+main = (suc zero) .

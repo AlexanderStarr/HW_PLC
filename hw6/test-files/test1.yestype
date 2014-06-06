@@ -1,0 +1,18 @@
+data nat where
+  zero : nat
+  suc : nat -> nat
+
+fun one : nat
+one = suc zero .
+
+data list where
+  nil : list
+  cons : nat -> list -> list 
+
+fun append : list -> list -> list 
+append nil ys = ys .
+append (cons x xs) ys = cons x (append xs ys) .
+
+fun map : (nat -> nat) -> list -> list
+map f nil = nil .
+map f (cons x xs) = cons (f x) (map f xs) .

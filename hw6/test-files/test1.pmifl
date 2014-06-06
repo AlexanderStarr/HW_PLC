@@ -1,0 +1,14 @@
+data nat where
+  zero : nat
+  suc : nat -> nat
+
+data list where
+  nil : list
+  cons : nat -> list -> list 
+
+fun append : list -> list -> list 
+append nil ys = ys .
+append (cons x xs) ys = cons x (append xs ys) .
+
+fun testlista : list
+testlista = cons one (cons one nil) .

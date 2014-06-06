@@ -1,0 +1,15 @@
+
+fun mult : nat -> nat -> nat
+mult zero y = zero .
+mult (suc x) y = add y (mult x y) .
+
+fun main : nat
+main = add (suc zero) (mult (suc (suc (suc zero))) (suc (suc zero))) .
+
+data nat where
+  zero : nat
+  suc : nat -> nat
+
+fun add : nat -> nat -> nat
+add zero y = y .
+add (suc x) y = suc (add x y) .

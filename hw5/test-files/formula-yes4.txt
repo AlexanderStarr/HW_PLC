@@ -1,0 +1,1 @@
+∀ a.∀ b.∀ c.(aa(a,b)→bb(a,b))→cc(b,b,a)

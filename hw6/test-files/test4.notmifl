@@ -1,0 +1,9 @@
+data list where
+  nil : list
+  cons : nat -> list -> list 
+
+fun append : list -> list -> list 
+append nil ys = ys .
+ha haha ha = .
+
+

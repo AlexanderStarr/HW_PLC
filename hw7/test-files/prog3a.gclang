@@ -1,0 +1,17 @@
+heapsize 6
+
+addroot 0
+
+0.b = 2
+2.b = 4
+4.a = 0
+4.b = 2
+
+1.a = 2
+1.b = 3
+
+snapshot
+
+gc
+
+snapshot

@@ -1,0 +1,12 @@
+data nat where
+  zero : nat
+  suc : nat -> nat
+
+fun one : nat
+one = suc zero .
+
+% the second symbol used in the type for cons is not a datatype
+data list where
+  nil : list
+  cons : nat -> zero -> list 
+
