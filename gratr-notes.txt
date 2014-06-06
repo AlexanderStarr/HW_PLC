@@ -1,0 +1,61 @@
+To compile on Linux/Mac:
+
+  -- change to the src/ subdirectory and run "make".  This uses the Ocaml
+     native-code compiler, and has been tested with OCaml 3.12.1.
+
+  -- this will produce the gratr executable, in the src/ subdirectory.
+
+To compile on Windows:
+
+  -- change to the src/ subdirectory and run "compile" from a Command shell.
+     This uses the Ocaml byte-code compiler, and has been tested with 
+     OCaml 3.12.1.
+
+  -- this will produce the gratr.exe executable, in the src/ subdirectory.
+
+To run:
+
+  -- run the gratr executable with a single grammar file as command-line
+     argument.  For example grammar files, see grammars/expression/lam.gr
+     and others.
+
+To compile the emitted Agda code:
+
+  -- the emitted code depends on a library you can download from here
+     with svn (username "guest", password "guest"):
+
+     https://svn.divms.uiowa.edu/repos/clc/class/111-spring14/lib
+
+  -- you need Agda version 2.3.2 (might work with earlier versions,
+     too).
+
+  -- if you have run gratr on a grammar file like grammars/expression/lam.gr,
+     you can compile this with agda as follows:
+
+     agda --no-termination-check -c -i path-to-the-downloaded-library -i agda -i . lam-main.agda
+
+     ** the -c flag is for "compile"; Agda will invoke the Haskell compiler at the end.
+
+     ** the --no-termination-checking flag is only needed if you have reorganizing rules
+        (and even then sometimes Agda can see they are terminating).  To isolate just
+        those for turning off termination checking, you can instead first run:
+
+        agda --no-termination-check -i path-to-the-downloaded-library -i agda -i . lam-reorg.agda
+
+	and then
+
+        agda -c -i path-to-the-downloaded-library -i agda -i . lam-main.agda
+
+	This will disable termination checking only for the reorganizing rules (in 
+	lam-reorg.agda), and then check the rest of the emitted parser with termination 
+	checking enabled.  To be really careful, you can check lam-types.agda first 
+	with termination checking enabled, then lam-reorg.agda with termination 
+	checking disabled, and finally lam-main.agda with termination checking enabled.
+
+  -- if all goes well, the generated executable will be lam-main, and
+     you can invoke this with an input file like this:
+
+     ./lam-main --showParsed grammars/expression/lam-test1.txt
+
+     This will print the parse tree if one could be generated (as it can
+     for this particular example).

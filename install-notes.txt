@@ -1,0 +1,215 @@
+The notes below are based on my experience installing Agda on a
+Windows 7 computer.  The process on Windows 8 is likely very similar,
+though I have not tried this.  These are the very detailed,
+step-by-step notes.
+
+You can likely skip all that and install Agda very easily by just
+downloading and installing these MSIs, in order:
+
+http://homepage.cs.uiowa.edu/~astump/agda/Haskell2013.2.0.0.v1.msi
+http://homepage.cs.uiowa.edu/~astump/agda/Emacs_for_Agda24.3.v1.msi
+http://homepage.cs.uiowa.edu/~astump/agda/Agda2.3.2.2.msi
+
+Then you just need to follow step 16 below, to add some extra commands
+to your .emacs file.  These MSIs have been confirmed to work on
+Windows 7 and Windows 8.
+----------------------------------------------------------------------
+I. Installing Agda and emacs
+
+0. FIRST TRY DOWNLOADING AND RUNNING THE INSTALLERS ABOVE.  IT WILL
+   BE MUCH EASIER THAN FOLLOWING THE DETAILED STEPS BELOW.  
+
+1. Download the Haskell Platform for Windows from 
+
+   http://www.haskell.org/platform/
+
+   and run the installer.  Haskell wants to install
+   itself to C:\Program Files (x86)\Haskell Platform\2013.2.0.0 
+   This should be fine.
+
+   The installer will also ask you want kind of installation you want.
+   The "standard" installation is fine.
+
+   Once the installer finishes, it will ask you if you want to install
+   GLUT on your computer.  GLUT is a Haskell library for doing
+   graphics with Open GL.  We will not be using GLUT, so you can
+   decline the installation of GLUT.
+
+2. Open a Windows command shell from the Start Menu, by typing "cmd" in
+   the box which lets you search for files and programs, and hitting enter.
+
+3. From the Windows command shell, first run
+
+     cabal update
+
+   Next run 
+
+     cabal install Agda
+
+   This 'cabal' program is a package manager for Haskell.  Running
+   'cabal install Agda' will download the Agda source code from 
+   hackage.haskell.org, a central server where Haskell libraries
+   and programs are posted.  Cabal will also download compile and 
+   additional Haskell packages needed by Agda.
+
+4. Download emacs version 24.3 from 
+
+     http://ftp.gnu.org/gnu/emacs/windows/
+
+   The file is at the bottom of the page:
+
+     emacs-24.3-bin-i386.zip
+
+   This is currently the latest version, although the specific version
+   likely does not matter too much.
+
+5. When the download is complete, extract the downloaded .zip file, 
+   by right-clicking on it, and choosing "Extract All...".  As the
+   destination for emacs, I chose
+
+     C:\Program Files (x86)
+
+   The extraction process will create a folder emacs-24.3 in that
+   directory.
+
+6. When the extraction process has completed, navigate to 
+
+     C:\Program Files (x86)\emacs-24.3\bin
+
+   and double-click on the addpm program.  This program will
+   add emacs to the Start menu.
+
+7. To complete the installation of the Agda emacs mode, we must
+   next add emacs to the Windows path.  To do this, right-click
+   on the icon for your computer within Windows Explorer, and
+   select Properties.  Then click "Advanced system settings".
+   This will pop up yet another window, with the Advanced
+   tab highlighted.  Click on "Environment Variables...", and
+   then request to edit the PATH variable.  In the text box
+   for the PATH variable, append ";C:\Program Files (x86)\emacs-24.3\bin"
+   (including the semicolon) to whatever text you see there (if
+   blank, you presumably do not need the semicolon).
+
+8. Close your existing Windows command shell, and start a new
+   one (as in Step 2 above).  This is to refresh the PATH
+   variable now that we have changed it (Step 7).
+
+9. From the new Windows command shell, run 
+
+     agda-mode setup
+
+   This should finish almost instantly, with a message
+   saying something about "Setup done. Try to (re)start
+   Emacs..."
+
+----------------------------------------------------------------------
+II. Installing extra fonts and configuring Agda
+
+10. We need to install some extra (free) fonts for Agda to show Unicode
+    more nicely.  Go to 
+
+    http://dejavu-fonts.org/wiki/Main_Page
+
+    and click the "download" link in roughly the middle of the page.
+ 
+11. From the new page that comes up, select "2.34/dejavu-fonts-ttf-2.34.zip"
+    from the list of download options.
+
+12. When the download completes, open the .zip file by double-clicking
+    on it from Windows Explorer.  Navigate to the dejavu-fonts-ttf-2.34\ttf
+    subdirectory.
+
+13. Double-click on "DejaVuSans".  This will pull up a font viewer window.
+
+14. Click on "Install".  This will install the DejaVuSans font on your
+    computer.
+
+15. We need to tell emacs to use the new font.  To do this, run emacs
+    (you can just select it from the Start menu), and then type
+
+    Control-x Control-f
+
+    This is the emacs "open file" command.  A little text box will 
+    appear at the very bottom of the emacs window.  Type
+
+    ~/.emacs
+
+    into that text box, and hit enter.  This will open your .emacs
+    file, a file that the emacs program processes for your user settings,
+    every time emacs starts up.
+
+16. At the very start of your .emacs file, cut and paste the contents 
+    of the following file:
+
+    https://svn.divms.uiowa.edu/repos/clc/class/111-spring14/emacs-extras.el
+
+    In the text you are cutting and pasting from that file, change YOUR-PATH
+    to the directory path which leads to the 111-spring14 directory
+    you installed.  Use forward slashes in the path.  So YOUR-PATH might
+    be Users/YourName/Documents.
+
+    You also should add the following text to your .emacs file:
+
+    (set-default-font "-outline-DejaVu Sans-normal-normal-normal-sans-*-*-*-*-p-*-iso8859-1")
+
+    This will prevent you from having to set the default font every time
+    you start emacs.  I did not include this in emacs-extras.el, because
+    on the CS lab machines, the code to set the default font is already 
+    included in a global configuration file.
+
+17. Select "Save" from the file menu, or just type 
+
+    Control-x Control-s
+
+18. Quit emacs.
+
+----------------------------------------------------------------------
+III. Testing Agda
+
+19. We need to get some sample Agda files to complete the
+    configuration and testing.  You can do this by checking out the
+    class repository using svn, following the directions here:
+
+	https://svn.divms.uiowa.edu/repos/clc/class/111-spring14/installing-and-using-svn.txt
+
+    You can then find a sample Agda file in 111-spring14/lib/bool.agda.
+
+20. Right-click on the file and choose "Open".  You will get a list of
+    programs that does not include Emacs.  Tell Windows that you want
+    to select the program to use from your locally installed programs.
+    You will get a window showing a bunch of programs, not including
+    Emacs.  Select "Browse..." and then navigate to 
+
+    C:\Program Files (x86)\emacs-24.3\bin
+
+    and select "runemacs" from the list.  Then click "Ok".
+
+21. You will return to the list of programs, but now emacs will be
+    listed.  Select it (if not already selected), and tell Windows
+    you always want to open files of this type (.agda) with this
+    program (emacs).  Click "ok".
+
+22. Emacs should now open with bool.agda.  
+
+23. You should see a file with characters including 𝔹.  If you see
+    weird squares with numbers in them, something has gone wrong
+    with the font installation.
+
+24. Now type Control-c Control-l.  This tells emacs to ask Agda to
+    process the file.  If this works, the text in the bool.agda file
+    should get colored with different colors.
+
+25. To complete the testing of Agda, open the file
+    111-spring14\dev\install-test.agda, either from within emacs,
+    or else by double-clicking that file in Windows Explorer.
+
+26. Type Control-c Control-l.  If you see an error message saying 
+    something about "cannot find file lib.agda", then there is
+    a problem configuring emacs, back in Step 16, so that it knows
+    about the class's standard library (which is in 111-spring14\lib).
+
+27. Agda installation, configuration, and testing is now complete!
+    You have Agda on Windows, with extra fonts and the class's
+    standard library.
+
+
